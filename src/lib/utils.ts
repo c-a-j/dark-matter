@@ -33,6 +33,7 @@ export const getPosts = async (collectionName: keyof typeof collections) => {
     
     return {
       ...post.data,
+      id: filePath,
       url: getUrl(urlPath),
     };
   })
@@ -43,16 +44,34 @@ export const getPosts = async (collectionName: keyof typeof collections) => {
       return !post.draft
     }
   })
-  .sort((a, b) => {
-    // Sort by published date, fallback to updated date, then by title
-    const dateA = a.published || a.updated || new Date(0);
-    const dateB = b.published || b.updated || new Date(0);
-    return dateB.getTime() - dateA.getTime();
-  })
 };
 
-export const getFeaturedPosts = async (collectionName: keyof typeof collections) => {
+export const getPostsAscending = async (collectionName: keyof typeof collections) => {
   const posts = await getPosts(collectionName)
+  const sorted = posts
+    .sort((a, b) => {
+      // Sort by published date, fallback to updated date, then by title
+      const dateA = a.published || a.updated || new Date(0);
+      const dateB = b.published || b.updated || new Date(0);
+      return dateA.getTime() - dateB.getTime();
+    })
+  return sorted;
+}
+
+export const getPostsDescending = async (collectionName: keyof typeof collections) => {
+  const posts = await getPosts(collectionName)
+  const sorted = posts
+    .sort((a, b) => {
+      // Sort by published date, fallback to updated date, then by title
+      const dateA = a.published || a.updated || new Date(0);
+      const dateB = b.published || b.updated || new Date(0);
+      return dateB.getTime() - dateA.getTime();
+    })
+  return sorted;
+}
+
+export const getFeaturedPosts = async (collectionName: keyof typeof collections) => {
+  const posts = await getPostsDescending(collectionName)
   const featured = posts
     .filter((post) => post.feature === true)
     .filter((post) => post.hide === false)
@@ -61,7 +80,7 @@ export const getFeaturedPosts = async (collectionName: keyof typeof collections)
 }
 
 export const getVisiblePosts = async (collectionName: keyof typeof collections) => {
-  const posts = await getPosts(collectionName)
+  const posts = await getPostsDescending(collectionName)
   const visible = posts
     .filter((post) => post.hide === false)
   return visible;
@@ -75,31 +94,9 @@ export const getUrl = (p: string) => {
 
 // Filter posts that are in the specified subdirectory
 export const getSubCollection = async (collectionName: keyof typeof collections, indexDirectory: string) => {
-  const posts = await getCollection(collectionName);
-  const subCollectionPosts = posts
-    .filter((post) => {
-      const filePath = post.id;
-      const dir = path.dirname(filePath);
-      return dir === indexDirectory;
-    })
-    .map((post) => {
-      const filePath = post.id;
-      const dir = path.dirname(filePath);
-      const urlPath = dir !== '.' 
-        ? `${collectionName}/${dir}/${post.data.slug}`
-        : `${collectionName}/${post.data.slug}`;
-      
-      return {
-        ...post.data,
-        url: getUrl(urlPath),
-      };
-    })
-    .sort((a, b) => {
-      // Sort by published date, fallback to updated date, then by title
-      const dateA = a.published || a.updated || new Date(0);
-      const dateB = b.published || b.updated || new Date(0);
-      return dateA.getTime() - dateB.getTime();
-    });
-
-  return subCollectionPosts;
+  const posts = await getPostsAscending(collectionName)
+  return posts.filter((post) => {
+    const dir = path.dirname(post.id);
+    return dir === indexDirectory;
+  });
 }

@@ -5,10 +5,10 @@ import PostSnippet from "../../components/common/PostSnippet.astro";
 import { siteConfig } from "../../site.config"
 import ContentHeader from "../../components/common/ContentHeader.astro";
 import SEO from "../../components/common/SEO.astro";
-import { getPosts } from "../../lib/utils";
+import { getVisiblePosts } from "../../lib/utils";
 
 const config = siteConfig;
-const posts = (await getPosts("blog"));
+const posts = (await getVisiblePosts("blog"));
 ---
 
 <Layout>
