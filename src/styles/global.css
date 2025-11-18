@@ -290,8 +290,10 @@
     color: var(--color-theme-light);
     border-radius: 0.25rem;
     font-weight: 500;
+    white-space: nowrap;
+    display: inline-block;
   }
-
+  
   code::before {
     content: "" !important;
   }
@@ -328,6 +330,7 @@
     white-space: pre;
     word-break: normal;
     overflow-wrap: normal;
+    display: inline;
   }
 
   /* Inside typography .prose content, prevent code wrapping */
