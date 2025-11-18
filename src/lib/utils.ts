@@ -20,9 +20,9 @@ export const processDate = (date: Date | undefined | null) => {
 };
 
 const getPublishedCollection = async (collectionName: keyof typeof collections) => {
-  const posts = await getCollection(collectionName);
+  const entries = await getCollection(collectionName);
   
-  return posts
+  return entries
     .filter((post) => {
       if (isDev) {
         return true;
@@ -31,29 +31,25 @@ const getPublishedCollection = async (collectionName: keyof typeof collections) 
       }
     })
     .map((post) => {
-      const filePath = post.id;
-      const dir = path.dirname(filePath);
-      
-      const urlPath = dir !== '.' 
-        ? `${collectionName}/${dir}/${post.data.slug}`
-        : `${collectionName}/${post.data.slug}`;
-      
-      const staticPath = dir !== '.' 
-        ? `${dir}/${post.data.slug}` 
-        : post.data.slug;
-      
+      const filePath = post.filePath;
+      const dir = filePath ? path.dirname(filePath) : '.';
+      const slug = post.data.slug;
+
+      const urlPath = `${dir}/${slug}`.replace(/\/?content\//, '')
+      const collectionRelativePath = urlPath.replace(new RegExp(`\/?${collectionName}\/`), '')
+
       return {
         entry: post,
         url: getUrl(urlPath),
-        staticPath,
+        collectionRelativePath,
       };
     });
 };
 
 export const getCollectionStaticPaths = async (collectionName: keyof typeof collections) => {
-  const results = await getPublishedCollection(collectionName);
-  return results.map(({ entry, staticPath }) => ({
-    params: { path: staticPath },
+  const entries = await getPublishedCollection(collectionName);
+  return entries.map(({ entry, collectionRelativePath }) => ({
+    params: { path: collectionRelativePath },
     props: { 
       entry: {
         ...entry,
@@ -66,15 +62,15 @@ export const getCollectionStaticPaths = async (collectionName: keyof typeof coll
 }
 
 export const getPosts = async (collectionName: keyof typeof collections) => {
-  const results = await getPublishedCollection(collectionName);
-  return results.map(({ entry, url }) => ({
-    ...entry.data,
-    id: entry.id,
-    url,
-  }));
+  const posts= await getPublishedCollection(collectionName);
+  return posts.map(({ entry, url, collectionRelativePath }) => {
+    return {
+      ...entry.data,
+      url,
+      collectionRelativePath,
+    }
+  });
 };
-
-  
 
 export const getPostsAscending = async (collectionName: keyof typeof collections) => {
   const posts = await getPosts(collectionName)
@@ -126,7 +122,7 @@ export const getUrl = (p: string) => {
 export const getSubCollection = async (collectionName: keyof typeof collections, indexDirectory: string) => {
   const posts = await getPostsAscending(collectionName)
   return posts.filter((post) => {
-    const dir = path.dirname(post.id);
+    const dir = path.dirname(post.collectionRelativePath);
     return dir === indexDirectory;
   });
 }
