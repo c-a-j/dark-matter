@@ -1,37 +1,13 @@
 ---
-import { getCollection, render } from "astro:content";
+import { render } from "astro:content";
 import PostLayout from "../../layouts/PostLayout.astro";
-import path from "path";
+import { getCollectionStaticPaths } from "../../lib/utils";
 
 export async function getStaticPaths() {
-  const collection = "blog"
-  const posts = await getCollection(collection);
-  
-  return posts.map((post) => {
-    // Extract directory from entry.id (e.g., "category/post.md" or "post.md")
-    const filePath = post.id;
-    const dir = path.dirname(filePath); // "category" or "."
-    
-    // Construct full path: include directory if present, otherwise just slug
-    const fullPath = dir !== '.' 
-      ? `${dir}/${post.data.slug}` 
-      : post.data.slug;
-    
-    return {
-      params: { path: fullPath },
-      props: { 
-        post: {
-          ...post,
-          data: {
-            ...post.data,
-          },
-        },
-      },
-    };
-  });
+  return await getCollectionStaticPaths("blog");
 }
 
-const { post } = Astro.props;
+const { entry: post } = Astro.props;
 const { Content, headings } = await render(post);
 ---
 

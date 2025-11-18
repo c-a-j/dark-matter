@@ -1,37 +1,13 @@
 ---
-import { getCollection, render } from "astro:content";
+import { render } from "astro:content";
 import ProjectLayout from "../../layouts/ProjectLayout.astro";
-import path from "path";
+import { getCollectionStaticPaths } from "../../lib/utils";
 
 export async function getStaticPaths() {
-  const collection = "projects"
-  const projects = await getCollection(collection);
-  
-  return projects.map((project) => {
-    // Extract directory from entry.id (e.g., "category/project.md" or "project.md")
-    const filePath = project.id;
-    const dir = path.dirname(filePath); // "category" or "."
-    
-    // Construct full path: include directory if present, otherwise just slug
-    const fullPath = dir !== '.' 
-      ? `${dir}/${project.data.slug}` 
-      : project.data.slug;
-    
-    return {
-      params: { path: fullPath },
-      props: { 
-        project: {
-          ...project,
-          data: {
-            ...project.data,
-          },
-        },
-      },
-    };
-  });
+  return await getCollectionStaticPaths("projects");
 }
 
-const { project } = Astro.props;
+const { entry: project } = Astro.props;
 const { Content, headings } = await render(project);
 ---
 
