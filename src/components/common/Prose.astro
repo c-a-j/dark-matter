@@ -15,12 +15,12 @@ const { class: customClass } = Astro.props;
     "prose",
     "prose-headings:font-mono",
     "prose-img:rounded-none",
-    
+
     // Paragraph styles
     "prose-p:text-[var(--color-theme-dark)]",
     "prose-p:dark:text-[var(--color-theme-light)]",
     "prose-p:text-justify",
-    
+
     // Link styles
     "prose-a:text-[var(--color-theme-dark)]",
     "dark:prose-a:text-[var(--color-theme-light)]",
@@ -30,7 +30,7 @@ const { class: customClass } = Astro.props;
     "prose-a:focus:outline-offset-2",
     "prose-a:focus:outline-theme-dark",
     "prose-a:dark:focus:outline-theme-light",
-    
+
     // Heading styles
     "prose-headings:text-[var(--color-theme-dark)]",
     "prose-headings:dark:text-[var(--color-theme-light)]",
@@ -39,16 +39,17 @@ const { class: customClass } = Astro.props;
     "prose-h2:text-2xl",
     "prose-h2:font-normal",
     "prose-h3:text-xl",
+    "prose-h3:font-normal",
     "prose-h4:text-lg",
     "prose-h5:text-base",
     "prose-h6:text-sm",
-    
+
     // Code and strong text
     "prose-code:text-[var(--color-theme-dark)]",
     "dark:prose-code:text-[var(--color-theme-light)]",
     "prose-strong:text-[var(--color-theme-dark)]",
     "dark:prose-strong:text-[var(--color-theme-light)]",
-    
+
     // List styles
     "prose-li:text-[var(--color-theme-dark)]",
     "dark:prose-li:text-[var(--color-theme-light)]",
@@ -56,10 +57,10 @@ const { class: customClass } = Astro.props;
     "prose-ul:dark:marker:text-[var(--color-theme-light)]",
     "prose-ol:marker:text-[var(--color-theme-dark)]",
     "prose-ol:dark:marker:text-[var(--color-theme-light)]",
-    
+
     // Custom class (if provided)
     customClass,
   ]}
 >
   <slot />
-</div
+</div>
