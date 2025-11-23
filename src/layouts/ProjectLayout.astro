@@ -9,6 +9,8 @@ import SEO from "../components/common/SEO.astro";
 import ContentLayoutHeader from "../components/common/ContentLayoutHeader.astro";
 import DraftBox from "../components/common/DraftBox.astro";
 import TableOfContents from "../components/common/TableOfContents.astro";
+import Signature from "../components/common/Signature.astro";
+
 import type { MarkdownHeading } from "astro";
 
 type Props = { frontmatter: PostFrontmatter; headings?: MarkdownHeading[] };
@@ -31,20 +33,20 @@ const isDraft = frontmatter.draft;
       <div class="flex-1 min-w-0">
         <Section class="pt-8">
           {isDev && isDraft && <DraftBox />}
-          <ContentLayoutHeader 
-            title={frontmatter.title} 
-            tags={tags} 
-            publishDate={publishDate} 
-            updateDate={updateDate} 
+          <ContentLayoutHeader
+            title={frontmatter.title}
+            tags={tags}
+            publishDate={publishDate}
+            updateDate={updateDate}
           />
           <Prose class="max-w-none">
             <slot />
           </Prose>
-          <p class="pt-8">- {config.personal.name}</p>
+          <Signature />
         </Section>
       </div>
       <div class="hidden xl:block w-80 flex-shrink-0">
-        <TableOfContents headings={headings}/>
+        <TableOfContents headings={headings} />
       </div>
     </div>
   </div>

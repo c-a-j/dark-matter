@@ -9,14 +9,14 @@ import SEO from "../components/common/SEO.astro";
 import ContentLayoutHeader from "../components/common/ContentLayoutHeader.astro";
 import DraftBox from "../components/common/DraftBox.astro";
 import TableOfContents from "../components/common/TableOfContents.astro";
-import SubCollectionLinks from "../components/common/SubCollectionLinks.astro"
+import SubCollectionLinks from "../components/common/SubCollectionLinks.astro";
+import Signature from "../components/common/Signature.astro";
 import type { MarkdownHeading } from "astro";
-
 
 import type { collections } from "../content.config";
 
-type Props = { 
-  frontmatter: PostFrontmatter; 
+type Props = {
+  frontmatter: PostFrontmatter;
   headings?: MarkdownHeading[];
   collectionName: keyof typeof collections;
 };
@@ -42,24 +42,33 @@ const indexDirectory = frontmatter.indexDirectory;
       <div class="flex-1 min-w-0">
         <Section class="pt-8">
           {isDev && isDraft && <DraftBox />}
-          <ContentLayoutHeader 
-            title={frontmatter.title} 
-            tags={tags} 
-            publishDate={publishDate} 
-            updateDate={updateDate} 
+          <ContentLayoutHeader
+            title={frontmatter.title}
+            tags={tags}
+            publishDate={publishDate}
+            updateDate={updateDate}
           />
           <Prose class="max-w-none">
             <slot />
-            {isIndex && indexDirectory && <SubCollectionLinks collectionName={collectionName} indexDirectory={indexDirectory}/>}
+            {
+              isIndex && indexDirectory && (
+                <SubCollectionLinks
+                  collectionName={collectionName}
+                  indexDirectory={indexDirectory}
+                />
+              )
+            }
           </Prose>
-          <p class="pt-8">- {config.personal.name}</p>
+          <Signature />
         </Section>
       </div>
-      {!hideTOC && (
-        <div class="hidden xl:block w-80 flex-shrink-0">
-          <TableOfContents headings={headings}/>
-        </div>
-      )}
+      {
+        !hideTOC && (
+          <div class="hidden xl:block w-80 flex-shrink-0">
+            <TableOfContents headings={headings} />
+          </div>
+        )
+      }
     </div>
   </div>
 </Layout>
