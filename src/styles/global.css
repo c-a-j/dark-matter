@@ -478,6 +478,19 @@ pre.prose code {
   background-color: oklch(from var(--color-theme-dark-muted) l c h / 0.05);
 }
 
+/* Number H2 elements when data-number-h2 is set */
+.prose[data-number-h2="true"] {
+  counter-reset: h2-counter;
+}
+
+.prose[data-number-h2="true"] h2 {
+  counter-increment: h2-counter;
+}
+
+.prose[data-number-h2="true"] h2::before {
+  content: counter(h2-counter) ". ";
+}
+
 /* Collapsible details/summary styling */
 .prose details summary {
   cursor: pointer;

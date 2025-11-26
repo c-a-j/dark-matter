@@ -1,13 +1,15 @@
 ---
 type Props = {
   class?: string;
+  numberH2?: boolean;
 };
 
-const { class: customClass } = Astro.props;
+const { class: customClass, numberH2 = false } = Astro.props;
 ---
 
 <div
   data-pagefind-body
+  data-number-h2={numberH2}
   class:list={[
     // Base styles
     "w-full",

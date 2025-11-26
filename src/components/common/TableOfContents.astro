@@ -4,12 +4,26 @@ import type { MarkdownHeading } from "astro";
 type Props = {
   headings?: MarkdownHeading[];
   class?: string;
+  numberH2?: boolean;
 };
 
-const { headings = [], class: customClass } = Astro.props;
+const { headings = [], class: customClass, numberH2 = false } = Astro.props;
 
 // Only include h2/h3 for brevity
 const filtered = headings.filter((h) => h.depth === 2 || h.depth === 3);
+
+// Number H2 headings if numberH2 is true
+let h2Counter = 0;
+const numberedHeadings = filtered.map((h) => {
+  if (h.depth === 2 && numberH2) {
+    h2Counter++;
+    return {
+      ...h,
+      text: `${h2Counter}. ${h.text}`
+    };
+  }
+  return h;
+});
 ---
 
 <aside class:list={[
@@ -23,7 +37,7 @@ const filtered = headings.filter((h) => h.depth === 2 || h.depth === 3);
   {filtered.length > 0 && (
     <nav class="pr-2">
       <ul class="space-y-1 text-sm">
-        {filtered.map((h) => (
+        {numberedHeadings.map((h) => (
           <li class:list={[h.depth === 3 ? "pl-4" : "pl-0"]}>
             <a 
               href={"#" + h.slug} 

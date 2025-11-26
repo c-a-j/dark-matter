@@ -16,6 +16,7 @@ const baseSchema = z.object({
   indexDirectory: z.string().optional(),
   published: z.date().transform((val) => new Date(val)).optional(),
   updated: z.date().transform((val) => new Date(val)).optional(),
+  numberH2: z.boolean().default(false),
 });
 
 type ContentType = {

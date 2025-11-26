@@ -19,9 +19,9 @@ const { frontmatter, headings } = Astro.props;
 const publishDate = processDate(frontmatter.published);
 const updateDate = processDate(frontmatter.updated);
 const tags = frontmatter.tags;
-const config = siteConfig;
 const isDev = import.meta.env.DEV;
 const isDraft = frontmatter.draft;
+const numberH2 = frontmatter.numberH2;
 ---
 
 <Layout>
@@ -39,14 +39,14 @@ const isDraft = frontmatter.draft;
             publishDate={publishDate}
             updateDate={updateDate}
           />
-          <Prose class="max-w-none">
+          <Prose class="max-w-none" numberH2={numberH2}>
             <slot />
           </Prose>
           <Signature />
         </Section>
       </div>
       <div class="hidden xl:block w-80 flex-shrink-0">
-        <TableOfContents headings={headings} />
+        <TableOfContents headings={headings} numberH2={numberH2} />
       </div>
     </div>
   </div>
