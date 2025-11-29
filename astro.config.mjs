@@ -5,6 +5,7 @@ import { siteConfig } from "./src/site.config";
 import remarkGitHubAlerts from "remark-github-markdown-alerts";
 import rehypeExternalLinks from "rehype-external-links";
 import remarkCollapsible from "./src/plugins/remark-collapsible.mjs";
+import remarkNowrap from "./src/plugins/remark-nowrap.mjs";
 
 // https://astro.build/config
 export default defineConfig({
@@ -25,7 +26,7 @@ export default defineConfig({
     },
     gfm: true,
     smartypants: true,
-    remarkPlugins: [remarkGitHubAlerts, remarkCollapsible],
+    remarkPlugins: [remarkGitHubAlerts, remarkCollapsible, remarkNowrap],
         rehypePlugins: [
           [rehypeExternalLinks, { target: '_blank', rel: ['noopener', 'noreferrer'] }]
         ],

@@ -491,6 +491,7 @@ pre.prose code {
   content: counter(h2-counter) ". ";
 }
 
+
 /* Collapsible details/summary styling */
 .prose details summary {
   cursor: pointer;
@@ -504,6 +505,17 @@ pre.prose code {
 
 :where(.dark, .dark *) .prose details summary:hover {
   color: var(--color-theme-accent-light);
+}
+
+/* Non-wrappable text (for file paths using [[text]] syntax) */
+.prose .nowrap {
+  white-space: nowrap;
+}
+
+.prose strong,
+.prose em {
+  white-space: nowrap;
+  display: inline-block;
 }
 
 /* Tabbed Code Blocks */
