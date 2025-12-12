@@ -14,9 +14,11 @@ const baseSchema = z.object({
   hideTOC: z.boolean().default(false),
   isIndex: z.boolean().default(false),
   indexDirectory: z.string().optional(),
+  isSubcollection: z.boolean().default(false),
   published: z.date().transform((val) => new Date(val)).optional(),
   updated: z.date().transform((val) => new Date(val)).optional(),
   numberH2: z.boolean().default(false),
+  paginate: z.boolean().default(false),
 });
 
 type ContentType = {

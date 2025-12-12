@@ -12,16 +12,19 @@ import TableOfContents from "../components/common/TableOfContents.astro";
 import SubCollectionLinks from "../components/common/SubCollectionLinks.astro";
 import Signature from "../components/common/Signature.astro";
 import type { MarkdownHeading } from "astro";
-
+import PostPaginate from "../components/common/PostPaginate.astro";
 import type { collections } from "../content.config";
+import type { PaginationInfo } from "../components/common/PostPaginate.astro";
+
 
 type Props = {
   frontmatter: PostFrontmatter;
   headings?: MarkdownHeading[];
   collectionName: keyof typeof collections;
+  paginationInfo?: PaginationInfo;
 };
 
-const { frontmatter, headings, collectionName } = Astro.props;
+const { frontmatter, headings, collectionName, paginationInfo } = Astro.props;
 const publishDate = processDate(frontmatter.published);
 const updateDate = processDate(frontmatter.updated);
 const tags = frontmatter.tags;
@@ -32,6 +35,7 @@ const hideTOC = frontmatter.hideTOC;
 const isIndex = frontmatter.isIndex;
 const indexDirectory = frontmatter.indexDirectory;
 const numberH2 = frontmatter.numberH2;
+const paginate = frontmatter.paginate;
 ---
 
 <Layout>
@@ -61,6 +65,7 @@ const numberH2 = frontmatter.numberH2;
             }
           </Prose>
           <Signature />
+          {paginate && <PostPaginate paginationInfo={paginationInfo} />}
         </Section>
       </div>
       {

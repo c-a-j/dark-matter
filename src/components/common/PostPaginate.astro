@@ -1,0 +1,40 @@
+---
+export type PaginationInfo = {
+  next: { title: string; url: string } | null;
+  previous: { title: string; url: string } | null;
+};
+
+type Props = {
+  paginationInfo?: PaginationInfo;
+};
+
+const { paginationInfo } = Astro.props;
+---
+{paginationInfo && (
+  <nav class="mt-15 pt-5">
+    <div class="flex justify-between items-center">
+      <div>
+        {paginationInfo.previous && (
+          <a 
+            href={paginationInfo.previous.url}
+            class="toc-link block py-1 transition-colors duration-200 hover-unmute flex items-center gap-2"
+          >
+            <span class="text-3xl leading-none" style="transform: translateY(-0.2em);">&larr;</span>
+            <span>{paginationInfo.previous.title}</span>
+          </a>
+        )}
+      </div>
+      <div>
+        {paginationInfo.next && (
+          <a 
+            href={paginationInfo.next.url}
+            class="toc-link block py-1 transition-colors duration-200 hover-unmute flex items-center gap-2"
+          >
+            <span>{paginationInfo.next.title}</span>
+            <span class="text-3xl leading-none" style="transform: translateY(-0.2em);">&rarr;</span>
+          </a>
+        )}
+      </div>
+    </div>
+  </nav>
+)}

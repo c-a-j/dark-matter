@@ -1,7 +1,8 @@
 ---
 import { render } from "astro:content";
 import PostLayout from "../../layouts/PostLayout.astro";
-import { getCollectionStaticPaths } from "../../lib/utils";
+import { getCollectionStaticPaths, getPaginationInfo } from "../../lib/utils";
+import path from "path";
 
 export async function getStaticPaths() {
   return await getCollectionStaticPaths("notes");
@@ -9,9 +10,21 @@ export async function getStaticPaths() {
 
 const { entry: post } = Astro.props;
 const { Content, headings } = await render(post);
+
+const paginationInfo = await getPaginationInfo({ 
+  url: Astro.url.pathname,
+  collectionName: "notes",
+  isSubcollection: post.data.isSubcollection,
+});
+
 ---
 
-<PostLayout frontmatter={post.data} headings={headings} collectionName="notes">
+<PostLayout 
+  frontmatter={post.data} 
+  headings={headings} 
+  collectionName="notes"
+  paginationInfo={paginationInfo}
+>
   <Content />
 </PostLayout>
 

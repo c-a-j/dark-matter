@@ -3,6 +3,7 @@ import { getCollection } from "astro:content";
 import path from "path";
 
 import type { collections } from "../content.config";
+import { colorForIntegration } from "astro/runtime/client/dev-toolbar/apps/utils/icons.js";
 const baseUrl = import.meta.env.BASE_URL;
 const isDev = import.meta.env.DEV;
 
@@ -42,6 +43,7 @@ const getPublishedCollection = async (collectionName: keyof typeof collections) 
         entry: post,
         url: getUrl(urlPath),
         collectionRelativePath,
+        filePath,
       };
     });
 };
@@ -51,23 +53,17 @@ export const getCollectionStaticPaths = async (collectionName: keyof typeof coll
   return entries.map(({ entry, collectionRelativePath }) => ({
     params: { path: collectionRelativePath },
     props: { 
-      entry: {
-        ...entry,
-        data: {
-          ...entry.data,
-        },
-      },
+      entry: entry as typeof entry & { filePath: string },
     },
   }));
 }
 
 export const getPosts = async (collectionName: keyof typeof collections) => {
-  const posts= await getPublishedCollection(collectionName);
-  return posts.map(({ entry, url, collectionRelativePath }) => {
+  const posts = await getPublishedCollection(collectionName);
+  return posts.map(({ entry, ...rest }) => {
     return {
       ...entry.data,
-      url,
-      collectionRelativePath,
+      ...rest,
     }
   });
 };
@@ -125,4 +121,47 @@ export const getSubCollection = async (collectionName: keyof typeof collections,
     const dir = path.dirname(post.collectionRelativePath);
     return dir === indexDirectory;
   });
+}
+
+interface getPaginationInfoProps {
+  url: string; // Add current URL parameter
+  collectionName: keyof typeof collections;
+  isSubcollection: boolean;
+}
+export const getPaginationInfo = async ({ url, collectionName, isSubcollection }: getPaginationInfoProps) => {
+  let paginationInfo = undefined;
+  let next = null;
+  let previous = null;
+
+  if (isSubcollection) {
+    const collectionRelativePath = path.dirname(url).replace(new RegExp(`\/?${collectionName}\/`), '')
+    const subCollectionPosts = await getSubCollection(collectionName, collectionRelativePath);
+    const sortedPosts = subCollectionPosts.sort((a, b) => {
+      const filenameA = path.basename(a.filePath);
+      const filenameB = path.basename(b.filePath);
+      return filenameA.localeCompare(filenameB);
+    });
+    
+    const currentIndex = sortedPosts.findIndex((p) => p.url === url);
+    next = currentIndex >= 0 && currentIndex < sortedPosts.length - 1 
+      ? sortedPosts[currentIndex + 1] 
+      : null;
+    previous = currentIndex > 0 
+      ? sortedPosts[currentIndex - 1] 
+      : null;
+  } else {
+    const posts = await getPostsDescending(collectionName);
+    const currentIndex = posts.findIndex((p) => p.url === url);
+    next = currentIndex >= 0 && currentIndex < posts.length - 1 
+      ? posts[currentIndex + 1] 
+      : null;
+    previous = currentIndex > 0 
+      ? posts[currentIndex - 1] 
+      : null;
+  }
+  paginationInfo = {
+    next,
+    previous,
+  };
+  return paginationInfo;
 }

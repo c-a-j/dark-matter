@@ -1,6 +1,6 @@
 import type { CollectionEntry } from "astro:content";
 
-export type PostFrontmatter = CollectionEntry<"blog">["data"] & {
+export type PostFrontmatter = CollectionEntry<"blog"|"notes">["data"] & {
   url: string;
 }; 
 
