@@ -97,9 +97,9 @@ export const siteConfig = {
   menu: {
     // nav_bar_name: "path/to/page",
     posts: "posts",
-    // projects: "projects",
-    // cv: "cv/general",
-    // about: "about",
+    projects: "projects",
+    cv: "cv/general",
+    about: "about",
     search: "search"
   }
 };
