@@ -1,24 +1,24 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import Section from "../../components/common/Section.astro";
-import { getCollection } from "astro:content";
 import { siteConfig } from "../../site.config";
 import ContentHeader from "../../components/common/ContentHeader.astro";
 import SEO from "../../components/common/SEO.astro";
 import TaggedPosts from "../../components/tags/TaggedPosts.astro";
 import { getUrl } from "../../lib/utils";
+import { getPublishedCollection } from "../../lib/utils";
 
 export async function getStaticPaths() {
   // Get all collections
-  const posts = await getCollection("posts");
-  const projects = await getCollection("projects");
+  const posts = await getPublishedCollection("posts");
+  const projects = await getPublishedCollection("projects");
   
   // Collect all unique tags
   const allTags = new Set<string>();
   
   [...posts, ...projects].forEach(item => {
-    if (item.data.tags) {
-      item.data.tags.forEach((tag: string) => allTags.add(tag));
+    if (item.entry.data.tags) {
+      item.entry.data.tags.forEach((tag: string) => allTags.add(tag));
     }
   });
   
@@ -33,19 +33,19 @@ const { tag } = Astro.props;
 const config = siteConfig;
 
 // Get all content with this tag
-const posts = (await getCollection("posts")).filter(post => 
-  post.data.tags?.includes(tag)
+const posts = (await getPublishedCollection("posts")).filter(post => 
+  post.entry.data.tags?.includes(tag)
 ).map((post) => ({
-  ...post.data,
-  url: getUrl(`blog/${post.data.slug}`),
+  ...post.entry.data,
+  url: getUrl(`blog/${post.entry.data.slug}`),
   type: 'blog'
 }));
 
-const projects = (await getCollection("projects")).filter(project => 
-  project.data.tags?.includes(tag)
+const projects = (await getPublishedCollection("projects")).filter(project => 
+  project.entry.data.tags?.includes(tag)
 ).map((project) => ({
-  ...project.data,
-  url: getUrl(`projects/${project.data.slug}`),
+  ...project.entry.data,
+  url: getUrl(`projects/${project.entry.data.slug}`),
   type: 'project'
 }));
 

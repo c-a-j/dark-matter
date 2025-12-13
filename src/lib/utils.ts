@@ -20,7 +20,7 @@ export const processDate = (date: Date | undefined | null) => {
   return `${monthSmall} ${day}, ${year}`;
 };
 
-const getPublishedCollection = async (collectionName: keyof typeof collections) => {
+export const getPublishedCollection = async (collectionName: keyof typeof collections) => {
   const entries = await getCollection(collectionName);
   
   return entries
