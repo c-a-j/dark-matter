@@ -4,7 +4,7 @@ import Anchor from "../common/Anchor.astro";
 import { getFeaturedPosts } from "../../lib/utils";
 import { getUrl } from "../../lib/utils";
 
-const recentPosts = (await getFeaturedPosts("blog"))
+const recentPosts = (await getFeaturedPosts("posts"))
 ---
 
 {recentPosts.length > 0 && (

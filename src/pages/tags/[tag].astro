@@ -10,14 +10,13 @@ import { getUrl } from "../../lib/utils";
 
 export async function getStaticPaths() {
   // Get all collections
-  const blogPosts = await getCollection("blog");
-  const notes = await getCollection("notes");
+  const posts = await getCollection("posts");
   const projects = await getCollection("projects");
   
   // Collect all unique tags
   const allTags = new Set<string>();
   
-  [...blogPosts, ...notes, ...projects].forEach(item => {
+  [...posts, ...projects].forEach(item => {
     if (item.data.tags) {
       item.data.tags.forEach((tag: string) => allTags.add(tag));
     }
@@ -34,20 +33,12 @@ const { tag } = Astro.props;
 const config = siteConfig;
 
 // Get all content with this tag
-const blogPosts = (await getCollection("blog")).filter(post => 
+const posts = (await getCollection("posts")).filter(post => 
   post.data.tags?.includes(tag)
 ).map((post) => ({
   ...post.data,
   url: getUrl(`blog/${post.data.slug}`),
   type: 'blog'
-}));
-
-const notes = (await getCollection("notes")).filter(note => 
-  note.data.tags?.includes(tag)
-).map((note) => ({
-  ...note.data,
-  url: getUrl(`notes/${note.data.slug}`),
-  type: 'note'
 }));
 
 const projects = (await getCollection("projects")).filter(project => 
@@ -59,7 +50,7 @@ const projects = (await getCollection("projects")).filter(project =>
 }));
 
 // Combine all content and sort by date
-const allContent = [...blogPosts, ...notes, ...projects].sort((a, b) => {
+const allContent = [...posts, ...projects].sort((a, b) => {
   const dateA = a.updated || a.published || new Date(0);
   const dateB = b.updated || b.published || new Date(0);
   return dateB.getTime() - dateA.getTime();
@@ -77,11 +68,8 @@ const allContent = [...blogPosts, ...notes, ...projects].sort((a, b) => {
       cursor={false} 
     />
     
-    {blogPosts.length > 0 ? (
-      <TaggedPosts contentType="Blog Posts" posts={blogPosts} />
-    ) : null}
-    {notes.length > 0 ? (
-      <TaggedPosts contentType="Notes" posts={notes} />
+    {posts.length > 0 ? (
+      <TaggedPosts contentType="Posts" posts={posts} />
     ) : null}
     {projects.length > 0 ? (
       <TaggedPosts contentType="Projects" posts={projects} />

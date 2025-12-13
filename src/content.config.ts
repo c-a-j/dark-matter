@@ -57,15 +57,11 @@ class Content {
 }
 
 export const contentTypes = {
-  blog: new Content({
-    directory: "./content/blog",
+  posts: new Content({
+    directory: "./content/posts",
     schema: baseSchema.extend({
       readTime: z.number().optional(),
     }),
-  }),
-  notes: new Content({
-    directory: "./content/notes", 
-    schema: baseSchema,
   }),
   projects: new Content({
     directory: "./content/projects",
@@ -124,8 +120,7 @@ const cvCollection = defineCollection({
 });
 
 export const collections = {
-  blog: contentTypes.blog.collection,
+  posts: contentTypes.posts.collection,
   projects: contentTypes.projects.collection,
-  notes: contentTypes.notes.collection,
   cv: cvCollection,
 }

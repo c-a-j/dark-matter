@@ -33,8 +33,8 @@ export const siteConfig = {
     cardImage: "/card-image.webp",
     keywords: ["web development", "design", "technology"]
   },
-  blog: {
-    titleSuffix: "Blog",
+  posts: {
+    titleSuffix: "Posts",
     description: "",
     longDescription: "",
     cardImage: "/card-image.webp",
@@ -87,9 +87,8 @@ export const siteConfig = {
     image: "/hero.webp",
   },
   texts: {
-    blogName: "Blog",
+    postsName: "Posts",
     projectsName: "Projects",
-    notesName: "Notes",
     cvName: "cv",
     viewAll: "View All",
     noPosts: "No posts found.",
@@ -97,11 +96,10 @@ export const siteConfig = {
   },
   menu: {
     // nav_bar_name: "path/to/page",
-    blog: "blog",
-    notes: "notes",
-    projects: "projects",
-    cv: "cv/general",
-    about: "about",
+    posts: "posts",
+    // projects: "projects",
+    // cv: "cv/general",
+    // about: "about",
     search: "search"
   }
 };
