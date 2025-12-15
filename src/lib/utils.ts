@@ -133,14 +133,8 @@ export const getPaginationInfo = async ({ url, collectionName, isSubcollection }
   let next = null;
   let previous = null;
 
-  console.log("DEBUG: -------------------------------");
-  console.log("DEBUG: url:", url);
-  console.log("DEBUG: collectionName:", collectionName);
-  console.log("DEBUG: isSubcollection:", isSubcollection);
-
   if (isSubcollection) {
     const collectionRelativePath = path.dirname(url).replace(new RegExp(`\/?${collectionName}\/`), '')
-    console.log("DEBUG: collectionRelativePath:", collectionRelativePath);
     const posts= await getSubCollection(collectionName, collectionRelativePath);
     const sortedPosts = posts.sort((a, b) => {
       const filenameA = path.basename(a.filePath);
@@ -177,7 +171,5 @@ export const getPaginationInfo = async ({ url, collectionName, isSubcollection }
     next,
     previous,
   };
-  console.log("DEBUG: paginationInfo:", paginationInfo);
-  console.log("DEBUG: -------------------------------");
   return paginationInfo;
 }

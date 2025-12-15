@@ -10,6 +10,7 @@ type Props = {
 
 const { paginationInfo } = Astro.props;
 ---
+
 {paginationInfo && (
   <nav class="mt-15 pt-5">
     <div class="flex justify-between items-center">
@@ -20,7 +21,8 @@ const { paginationInfo } = Astro.props;
             class="toc-link block py-1 transition-colors duration-200 hover-unmute flex items-center gap-2"
           >
             <span class="text-3xl leading-none" style="transform: translateY(-0.2em);">&larr;</span>
-            <span>{paginationInfo.previous.title}</span>
+            <span class="md:hidden">Previous</span>
+            <span class="hidden md:inline">{paginationInfo.previous.title}</span>
           </a>
         )}
       </div>
@@ -30,7 +32,8 @@ const { paginationInfo } = Astro.props;
             href={paginationInfo.next.url}
             class="toc-link block py-1 transition-colors duration-200 hover-unmute flex items-center gap-2"
           >
-            <span>{paginationInfo.next.title}</span>
+            <span class="hidden md:inline">{paginationInfo.next.title}</span>
+            <span class="md:hidden">Next</span>
             <span class="text-3xl leading-none" style="transform: translateY(-0.2em);">&rarr;</span>
           </a>
         )}
