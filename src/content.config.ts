@@ -78,7 +78,7 @@ const cvSchema = z.object({
     title: z.string(),
     subtitle: z.string(),
     image: z.string(),
-  }),
+  }).optional(),
   summary: z.string(),
   experience: z.object({
     sectionTitle: z.string(),
@@ -89,7 +89,7 @@ const cvSchema = z.object({
       endDate: z.string(),
       bullets: z.array(z.string()),
     })),
-  }),
+  }).optional(),
   otherExperience: z.object({
     sectionTitle: z.string(),
     positions: z.array(z.object({
@@ -99,7 +99,7 @@ const cvSchema = z.object({
       endDate: z.string(),
       bullets: z.array(z.string()),
     })),
-  }),
+  }).optional(),
   education: z.object({
     degrees: z.array(z.object({
       title: z.string(),
@@ -107,11 +107,11 @@ const cvSchema = z.object({
       dateObtained: z.string(),
       honors: z.string().optional(),
     })),
-  }),
+  }).optional(),
   strengths: z.object({
     sectionTitle: z.string(),
     strengths: z.array(z.any()),
-  }),
+  }).optional(),
 });
 
 const cvCollection = defineCollection({

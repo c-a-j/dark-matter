@@ -24,7 +24,7 @@ export async function getStaticPaths() {
 }
 
 const { cvData, cvId } = Astro.props;
-const isPublished = siteConfig.cv.publish.includes(cvId);
+const isPublished = import.meta.env.DEV || siteConfig.cv.publish.includes(cvId);
 
 const { hero, summary, experience, otherExperience, education, strengths } = cvData;
 ---
@@ -35,16 +35,16 @@ const { hero, summary, experience, otherExperience, education, strengths } = cvD
     <SEO configKey="cv" />
   </Fragment>
   <Section class="my-16">
-    <Hero 
+    {hero && <Hero 
       title={hero.title} 
       subtitle={hero.subtitle} 
       image={hero.image} 
-    />
-    <Summary content={summary} />
-    <Strengths strengths={strengths} />
-    <Experience experience={experience} />
-    <Education education={education}/>
-    <Experience experience={otherExperience} />
+    />}
+    {summary && <Summary content={summary} />}
+    {strengths && <Strengths strengths={strengths} />}
+    {experience && <Experience experience={experience} />}
+    {education && <Education education={education}/>}
+    {otherExperience && <Experience experience={otherExperience} /> }
   </Section>
 </Layout>
 ) || (
