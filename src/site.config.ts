@@ -23,7 +23,8 @@ export const siteConfig = {
     lastName: "Doe",
     githubProfile: "https://github.com",
     twitterProfile: "https://twitter.com",
-    linkedinProfile: "https://linkedin.com/"
+    linkedinProfile: "https://linkedin.com/",
+    signature: "JD",
   },
   global: {
     title: "John Doe",
