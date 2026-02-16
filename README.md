@@ -5,23 +5,18 @@ theme's features will generally follow [my personal blog](https://var-log.dev).
 
 ## 🔥 Features
 
-### Implemented
-
-- type-safe markdown (content collections with Zod schemas)
-- super fast performance (static generation, minimal JS)
-- accessible (keyboard navigation, VoiceOver-friendly)
-- responsive (mobile through desktop)
-- SEO-friendly (meta tags, canonical URLs, Open Graph)
-- light & dark mode with theme toggle
-- search (Pagefind, build-time index)
-- draft posts & pagination
-- posts, projects, and CV content types
-- highly customizable (`site.config.ts`, content collections)
-- sitemap & RSS feed
-
-### Planned
-
-- dynamic OG image generation for blog posts
+- [x] type-safe markdown (content collections with Zod schemas)
+- [x] super fast performance (static generation, minimal JS)
+- [x] accessible (keyboard navigation, VoiceOver-friendly)
+- [x] responsive (mobile through desktop)
+- [x] SEO-friendly (meta tags, canonical URLs, Open Graph)
+- [x] light & dark mode with theme toggle
+- [x] search (Pagefind, build-time index)
+- [x] draft posts & pagination
+- [x] posts, projects, and CV content types
+- [x] highly customizable (`site.config.ts`, content collections)
+- [x] sitemap & RSS feed
+- [ ] dynamic OG image generation for blog posts
 
 ## ✅ Lighthouse Score
 

@@ -1,7 +1,7 @@
 ---
 title: Welcome to Dark Matter
 slug: intro
-description: A comprehensive showcase of the Dark Matter Astro theme features
+description: A showcase of the Dark Matter Astro theme features
 longDescription: Discover all the powerful features of the Dark Matter Astro theme including blog posts, projects, notes, CV, search functionality, and more.
 cardImage: "/hero.webp"
 tags: ["astro", "portfolio", "blog", "cv", "open-source"]
@@ -11,16 +11,15 @@ published: 2025-12-18T02:39:03+00:00
 updated: 2025-12-18T02:39:03+00:00
 ---
 
-# Welcome to the Dark Matter Astro Theme
+# Welcome to Dark Matter
 
-**Dark Matter** is a modern, feature-rich Astro theme designed for developers, designers, and content creators who want a professional online presence. This theme showcases the perfect blend of functionality and aesthetics.
+**Dark Matter** is a modern Astro theme for developers, designers, and content creators—functionality and aesthetics in one package.
 
 ## 🚀 Key Features
 
 ### 📝 **Multi-Content Support**
 - **Blog Posts**: Rich markdown support with reading time estimation
 - **Projects**: Showcase your work with GitHub and live demo links
-- **Notes**: Quick thoughts and documentation
 - **CV/Resume**: Professional resume with structured data
 
 ### 🎨 **Modern Design**
@@ -41,9 +40,8 @@ The theme supports multiple content types, each with its own purpose:
 
 | Content Type | Purpose | Features |
 |--------------|---------|----------|
-| **Blog** | Articles & tutorials | Reading time, tags, featured posts |
-| **Projects** | Portfolio showcase | GitHub links, live demos, tech stacks |
-| **Notes** | Quick thoughts | Simple markdown, tagging |
+| **Blog** | Articles & tutorials | tags, featured posts |
+| **Projects** | Portfolio showcase | GitHub links, live demos |
 | **CV** | Professional resume | Structured experience, education, skills |
 
 ## 🛠 Technical Highlights
@@ -173,6 +171,23 @@ print(fibonacci(10))
 > > This is a nested blockquote
 > > > And even deeper nesting
 
+#### Special Blockquotes
+
+>[!NOTE]
+> Note
+
+>[!TIP]
+> Tip
+
+>[!IMPORTANT]
+> Important
+
+>[!CAUTION]
+> Caution
+
+>[!WARNING]
+> Warning
+
 #### Links and Images
 
 [Link to Markdown Guide](https://www.markdownguide.org/cheat-sheet/)
@@ -182,7 +197,6 @@ print(fibonacci(10))
 #### Horizontal Rules
 
 ---
-
 ### Extended Syntax Examples
 
 #### Tables
@@ -212,23 +226,8 @@ Term 2
 
 #### Emoji Support
 
-That is so funny! :joy: 
+🚀 💻 🎨 🔍 📱 ⚡ 🛠️ 📊 🎯
 
-Other emojis: 🚀 💻 🎨 🔍 📱 ⚡ 🛠️ 📊 🎯
 
->[!NOTE]
-> Note
-
->[!TIP]
-> Tip
-
->[!IMPORTANT]
-> Important
-
->[!CAUTION]
-> Caution
-
->[!WARNING]
-> Warning
 
 ---
