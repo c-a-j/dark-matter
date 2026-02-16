@@ -20,11 +20,7 @@ theme's features will generally follow [my personal blog](https://var-log.dev).
 
 ## Lighthouse Score
 
-<p align="center">
-  <a href="https://pagespeed.web.dev/report?url=https%3A%2F%2Fc-a-j.github.io%2Fdark-matter%2F&form_factor=desktop">
-    <img width="710" alt="DarkMatter Lighthouse Score" src="lighthouse-score.svg">
-  </a>
-</p>
+(Working on it)[https://pagespeed.web.dev/report?url=https%3A%2F%2Fc-a-j.github.io%2Fdark-matter%2Fform_factor=desktop"]
 
 ## 🚀 Project Structure
 
