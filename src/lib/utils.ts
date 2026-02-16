@@ -122,53 +122,39 @@ export const getSubCollection = async (collectionName: keyof typeof collections,
   });
 }
 
+/** Strip trailing slash for consistent URL comparison. */
+const normalizeUrl = (url: string) =>
+  url.endsWith('/') ? url.slice(0, -1) : url;
+
+/** Find the next and previous posts relative to the current URL. */
+const findAdjacentPosts = (posts: { url: string; title: string }[], currentUrl: string) => {
+  const normalized = normalizeUrl(currentUrl);
+  const currentIndex = posts.findIndex((p) => normalizeUrl(p.url) === normalized);
+  return {
+    next: currentIndex >= 0 && currentIndex < posts.length - 1
+      ? posts[currentIndex + 1]
+      : null,
+    previous: currentIndex > 0
+      ? posts[currentIndex - 1]
+      : null,
+  };
+};
+
 interface getPaginationInfoProps {
   url: string; 
   collectionName: keyof typeof collections;
   isSubcollection: boolean;
 }
 export const getPaginationInfo = async ({ url, collectionName, isSubcollection }: getPaginationInfoProps) => {
-  let paginationInfo = undefined;
-  let next = null;
-  let previous = null;
-
   if (isSubcollection) {
-    const collectionRelativePath = path.dirname(url).replace(new RegExp(`\/?${collectionName}\/`), '')
-    const posts= await getSubCollection(collectionName, collectionRelativePath);
-    const sortedPosts = posts.sort((a, b) => {
-      const filenameA = path.basename(a.filePath);
-      const filenameB = path.basename(b.filePath);
-      return filenameA.localeCompare(filenameB);
-    });
-
-    const currentIndex = sortedPosts.findIndex((p) => {
-      const postUrl = p.url.endsWith('/') ? p.url.slice(0, -1) : p.url;
-      const currentUrl = url.endsWith('/') ? url.slice(0, -1) : url;
-      return currentUrl === postUrl;
-    });
-    next = currentIndex >= 0 && currentIndex < sortedPosts.length - 1 
-      ? sortedPosts[currentIndex + 1] 
-      : null;
-    previous = currentIndex > 0 
-      ? sortedPosts[currentIndex - 1] 
-      : null;
-  } else {
-    const posts = await getPostsDescending(collectionName);
-    const currentIndex = posts.findIndex((p) => {
-      const postUrl = p.url.endsWith('/') ? p.url.slice(0, -1) : p.url;
-      const currentUrl = url.endsWith('/') ? url.slice(0, -1) : url;
-      return currentUrl === postUrl;
-    });
-    next = currentIndex >= 0 && currentIndex < posts.length - 1 
-      ? posts[currentIndex + 1] 
-      : null;
-    previous = currentIndex > 0 
-      ? posts[currentIndex - 1] 
-      : null;
+    const collectionRelativePath = path.dirname(url).replace(new RegExp(`\/?${collectionName}\/`), '');
+    const posts = await getSubCollection(collectionName, collectionRelativePath);
+    const sorted = posts.sort((a, b) =>
+      path.basename(a.filePath).localeCompare(path.basename(b.filePath))
+    );
+    return findAdjacentPosts(sorted, url);
   }
-  paginationInfo = {
-    next,
-    previous,
-  };
-  return paginationInfo;
+
+  const posts = await getPostsDescending(collectionName);
+  return findAdjacentPosts(posts, url);
 }

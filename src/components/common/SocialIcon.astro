@@ -1,0 +1,27 @@
+---
+import fs from "node:fs";
+import path from "node:path";
+
+export type Props = {
+  icon: string;
+  size?: number;
+  class?: string;
+};
+
+const { icon, size = 32, class: className } = Astro.props;
+
+const iconsDir = path.join(process.cwd(), "node_modules", "@tabler", "icons", "icons", "outline");
+
+let svgContent = "";
+try {
+  svgContent = fs.readFileSync(path.join(iconsDir, `${icon}.svg`), "utf-8")
+    .replace(/width="24"/, `width="${size}"`)
+    .replace(/height="24"/, `height="${size}"`)
+    .replace(/stroke-width="2"/, `stroke-width="1.2"`)
+    .replace(/class="[^"]*"/, className ? `class="${className}"` : "");
+} catch {
+  // icon not found in @tabler/icons
+}
+---
+
+<Fragment set:html={svgContent} />

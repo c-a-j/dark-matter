@@ -21,58 +21,21 @@ const baseSchema = z.object({
   paginate: z.boolean().default(false),
 });
 
-type ContentType = {
-  directory: string,
-  schema: any,
+/** Define a markdown content collection with auto-generated slugs. */
+function defineMarkdownCollection(directory: string, schema: z.ZodObject<any>) {
+  return defineCollection({
+    loader: glob({ pattern: "**/*.md", base: directory }),
+    schema: schema.transform((data) => {
+      const slug =
+        data.slug ?? data.title
+          .toLowerCase()
+          .replace(/\s+/g, "-")
+          .replace(/[^\w-]/g, "");
+      return { ...data, slug };
+    }),
+  });
 }
 
-class Content {
-  public directory: string = ""
-  public schema: z.ZodObject<any>
-  public collection: ReturnType<typeof defineCollection>;
-
-  constructor(c: ContentType) {
-    this.directory = c.directory;
-    this.schema = c.schema;
-    this.collection = this.genContentCollection()
-  }
-  
-  genContentCollection = (): ReturnType<typeof defineCollection> => {
-    return defineCollection({
-      loader: glob({ pattern: "**/*.md", base: this.directory }),
-      schema: this.schema.transform((data) => {
-        const slug =
-          data.slug ?? data.title
-            .toLowerCase()
-            .replace(/\s+/g, "-")
-            .replace(/[^\w-]/g, "");
-        const newData = {
-          ...data,
-          slug,
-        };
-        return newData;
-      }),
-    })
-  }
-}
-
-export const contentTypes = {
-  posts: new Content({
-    directory: "./content/posts",
-    schema: baseSchema.extend({
-      readTime: z.number().optional(),
-    }),
-  }),
-  projects: new Content({
-    directory: "./content/projects",
-    schema: baseSchema.extend({
-      repoUrl: z.string().url().optional(),
-      demoUrl: z.string().url().optional(),
-    }),
-  })
-} as const;
-
-// CV Collection Schema
 const cvSchema = z.object({
   hero: z.object({
     title: z.string(),
@@ -114,13 +77,16 @@ const cvSchema = z.object({
   }).optional(),
 });
 
-const cvCollection = defineCollection({
-  loader: glob({ pattern: "**/*.yaml", base: "./content/cv" }),
-  schema: cvSchema,
-});
-
 export const collections = {
-  posts: contentTypes.posts.collection,
-  projects: contentTypes.projects.collection,
-  cv: cvCollection,
-}
+  posts: defineMarkdownCollection("./content/posts", baseSchema.extend({
+    readTime: z.number().optional(),
+  })),
+  projects: defineMarkdownCollection("./content/projects", baseSchema.extend({
+    repoUrl: z.string().url().optional(),
+    demoUrl: z.string().url().optional(),
+  })),
+  cv: defineCollection({
+    loader: glob({ pattern: "**/*.yaml", base: "./content/cv" }),
+    schema: cvSchema,
+  }),
+};
