@@ -1,29 +1,86 @@
-# Astro Starter Kit: Minimal
+# DarkMatter
 
-```sh
-npm create astro@latest -- --template minimal
-```
+DarkMatter is a minimal, responsive, and accessible Astro blog theme. This
+theme's features will generally follow [my personal blog](https://var-log.dev).
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Features
+
+- type-safe markdown
+- super fast performance
+- accessible (Keyboard/VoiceOver)
+- responsive (mobile ~ desktops)
+- SEO-friendly
+- light & dark mode
+- fuzzy search
+- draft posts & pagination
+- sitemap & rss feed
+- followed best practices
+- highly customizable
+- dynamic OG image generation for blog posts #15 (Blog Post)
+
+## Lighthouse Score
+
+<p align="center">
+  <a href="https://pagespeed.web.dev/report?url=https%3A%2F%2Fc-a-j.github.io%2Fdark-matter%2F&form_factor=desktop">
+    <img width="710" alt="DarkMatter Lighthouse Score" src="lighthouse-score.svg">
+  </a>
+</p>
 
 ## 🚀 Project Structure
 
-Inside of your Astro project, you'll see the following folders and files:
-
 ```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+.
+├── astro.config.mjs
+├── content
+│   ├── cv
+│   ├── posts
+│   └── projects
+├── LICENSE.md
+├── new-post.sh
+├── package.json
+├── pagefind.json
+├── pnpm-lock.yaml
+├── public
+├── README.md
+├── src
+│   ├── components
+│   │   ├── about
+│   │   ├── common
+│   │   ├── cv
+│   │   ├── home
+│   │   └── tags
+│   ├── content.config.ts
+│   ├── layouts
+│   ├── lib
+│   ├── pages
+│   ├── plugins
+│   ├── site.config.ts
+│   └── styles
+└── tsconfig.json
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page
+is exposed as a route based on its file name.
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+There's nothing special about `src/components/`, but that's where we like to put
+any Astro/React/Vue/Svelte/Preact components.
 
 Any static assets, like images, can be placed in the `public/` directory.
+
+## 📖 Documentation
+
+## 💻 Tech Stack
+
+- Main Framework - Astro
+- Type Checking - TypeScript
+- Styling - TailwindCSS
+- UI/UX - Figma Design File
+- Static Search - FuseJS
+- Icons - Tablers
+- Code Formatting - Prettier
+- Deployment - Cloudflare Pages
+- Illustration in About Page - https://freesvgillustration.com
+- Linting - ESLint
 
 ## 🧞 Commands
 
@@ -38,10 +95,18 @@ All commands are run from the root of the project, from a terminal:
 | `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `npm run astro -- --help` | Get help using the Astro CLI                     |
 
-## 👀 Want to learn more?
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## 👀 Want to learn more?
 
 https://scripter.co/
 https://chriswilliams.dev/
 https://github.com/RATIU5/zaggonaut
+
+## ✨ Feedback & Suggestions
+
+If you have any suggestions/feedback, you can contact me via my
+[email](clint@var-log.dev). Alternatively, feel free to open an issue if you
+find bugs or want to request new features.
+
+## 📜 License
+Licensed under the MIT License, Copyright © 2025
