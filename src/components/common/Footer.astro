@@ -2,12 +2,15 @@
 import Anchor from "./Anchor.astro";
 import SocialIcon from "./SocialIcon.astro";
 import { siteConfig } from "../../site.config";
+import { getUrl } from "../../lib/utils";
 
 const config = siteConfig;
 const opacities = [];
 for (let i = 10; i <= 70; i += 10) {
   opacities.push(i);
 }
+
+const resolveUrl = (url: string) => (url.startsWith("/") ? getUrl(url) : url);
 ---
 
 <footer class="mb-0">
@@ -18,7 +21,7 @@ for (let i = 10; i <= 70; i += 10) {
       {
         config.socialLinks.map(social => (
           <Anchor
-            url={social.url}
+            url={resolveUrl(social.url)}
             hoverUnderline={false}
             aria-label={`${config.personal.name} ${social.name}`}
             additonalClasses="text-theme-dark dark:text-theme-light group hover:text-theme-accent-dark dark:hover:text-theme-accent-light hover:fill-theme-accent-dark dark:hover:fill-theme-accent-light theme-transition"

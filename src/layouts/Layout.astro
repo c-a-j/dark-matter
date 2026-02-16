@@ -21,6 +21,12 @@ const allowThemeToggle = siteConfig.site.allowThemeToggle ?? true;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href={getUrl("/favicon.svg")} />
     <meta name="generator" content={Astro.generator} />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title={siteConfig.global.title}
+      href={getUrl("/rss.xml")}
+    />
 
     <!-- Theme detection script - runs before page renders -->
     <script is:inline define:vars={{ defaultTheme, allowThemeToggle }}>

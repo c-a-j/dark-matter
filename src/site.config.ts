@@ -39,7 +39,7 @@ export const siteConfig = {
     { name: "Discord", url: "https://discord.gg/", icon: "brand-discord" },
     { name: "YouTube", url: "https://youtube.com/", icon: "brand-youtube" },
     { name: "Mail", url: "mailto:your@email.com", icon: "mail" },
-    { name: "RSS", url: "mailto:your@email.com", icon: "rss" },
+    { name: "RSS", url: "/rss.xml", icon: "rss" },
   ],
   global: {
     title: "John Doe",
