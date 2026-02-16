@@ -3,40 +3,43 @@
 import type { StrengthItem } from "../../lib/cv.types";
 
 export type Props = {
-  strengths: StrengthItem[]
+  strengths: StrengthItem[];
 };
 
 const { strengths } = Astro.props;
 ---
 
-<div class="relative text-theme-dark dark:text-theme-light theme-transition flex flex-col gap-3">
-    <div class="ml-4">
-        <ul class="cv-item-1 list-inside">
-          {strengths.map(bullet => (
-            <li>
-              {bullet.item}
-              {bullet.subItem && (
-                <ul class="cv-item-2 list-inside ml-3">
-                  {Array.isArray(bullet.subItem) ? (
-                    bullet.subItem.map((subItem: string) => (
-                      <li>{subItem}</li>
-                    ))
-                  ) : (
-                    <li>
-                      {bullet.subItem.item}
-                      {bullet.subItem.subItem && Array.isArray(bullet.subItem.subItem) && (
-                        <ul class="cv-item-3 list-inside ml-3">
+<div
+  class="relative flex flex-col gap-3 text-theme-dark theme-transition dark:text-theme-light"
+>
+  <div class="ml-4">
+    <ul class="cv-item-1 list-inside">
+      {
+        strengths.map(bullet => (
+          <li>
+            {bullet.item}
+            {bullet.subItem && (
+              <ul class="cv-item-2 ml-3 list-inside">
+                {Array.isArray(bullet.subItem) ? (
+                  bullet.subItem.map((subItem: string) => <li>{subItem}</li>)
+                ) : (
+                  <li>
+                    {bullet.subItem.item}
+                    {bullet.subItem.subItem &&
+                      Array.isArray(bullet.subItem.subItem) && (
+                        <ul class="cv-item-3 ml-3 list-inside">
                           {bullet.subItem.subItem.map((subSubItem: string) => (
                             <li>{subSubItem}</li>
                           ))}
                         </ul>
                       )}
-                    </li>
-                  )}
-                </ul>
-              )}
-            </li>
-          ))}
-        </ul>
-    </div>
+                  </li>
+                )}
+              </ul>
+            )}
+          </li>
+        ))
+      }
+    </ul>
+  </div>
 </div>

@@ -4,27 +4,36 @@ import ThemeToggle from "./ThemeToggle.astro";
 import { getUrl } from "../../lib/utils";
 
 const config = siteConfig;
-const currentPath = Astro.url.pathname.endsWith("/") ? Astro.url.pathname.slice(0, -1) : Astro.url.pathname;
+const currentPath = Astro.url.pathname.endsWith("/")
+  ? Astro.url.pathname.slice(0, -1)
+  : Astro.url.pathname;
 const baseUrl = import.meta.env.BASE_URL;
 ---
 
-<header class="sticky top-0 bg-theme-light dark:bg-theme-dark z-10">
-  <div class="flex justify-center items-center py-2">
-    <div class="flex justify-between items-center w-full max-w-4xl px-6">
-      <div class="text-xl font-bold hidden md:block">
+<header class="sticky top-0 z-10 bg-theme-light dark:bg-theme-dark">
+  <div class="flex items-center justify-center py-2">
+    <div class="flex w-full max-w-4xl items-center justify-between px-6">
+      <div class="hidden text-xl font-bold md:block">
         <a href={baseUrl}>{config.global.navBarTitle}.</a>
-      </div> 
+      </div>
 
-      <nav class="flex gap-6 items-center">
-          {
-            Object.entries(config.menu).map((i) => {
+      <nav class="flex items-center gap-6">
+        {
+          Object.entries(config.menu).map(i => {
             const isActive = currentPath === getUrl(i[1]);
-              return (<a href={getUrl(i[1])} class={`hover-underline nav ${isActive ? 'active' : ''}`}>{i[0]}</a>);
-            })
-          }
-          <ThemeToggle />
+            return (
+              <a
+                href={getUrl(i[1])}
+                class={`hover-underline nav ${isActive ? "active" : ""}`}
+              >
+                {i[0]}
+              </a>
+            );
+          })
+        }
+        <ThemeToggle />
       </nav>
     </div>
   </div>
-  <hr class="w-full border-t border-gray-300 dark:border-gray-600 my-1" />
+  <hr class="my-1 w-full border-t border-gray-300 dark:border-gray-600" />
 </header>

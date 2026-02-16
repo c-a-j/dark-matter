@@ -1,7 +1,7 @@
 /* Inline code */
 @layer base {
   code {
-    @apply px-1.5 py-0.5 text-sm font-mono rounded;
+    @apply rounded px-1.5 py-0.5 font-mono text-sm;
     background-color: var(--color-theme-light-muted);
     color: var(--color-theme-light);
     font-weight: 500;
@@ -21,7 +21,7 @@
 
   /* Code blocks */
   pre {
-    @apply p-4 rounded-lg overflow-x-auto;
+    @apply overflow-x-auto rounded-lg p-4;
     background-color: var(--color-theme-dark-muted);
     color: var(--color-theme-light);
     white-space: pre;
@@ -35,7 +35,7 @@
   }
 
   pre code {
-    @apply p-0 bg-transparent;
+    @apply bg-transparent p-0;
     color: inherit;
     white-space: pre;
     word-break: normal;
@@ -72,11 +72,11 @@ pre.prose code {
 
 .prose th,
 .prose td {
-  @apply border border-gray-300 dark:border-gray-600 px-4 py-2;
+  @apply border border-gray-300 px-4 py-2 dark:border-gray-600;
 }
 
 .prose th {
-  @apply bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100 font-semibold;
+  @apply bg-gray-100 font-semibold text-gray-900 dark:bg-gray-800 dark:text-gray-100;
 }
 
 .prose td {
@@ -89,7 +89,7 @@ pre.prose code {
 
 /* GitHub alert blocks */
 .markdown-alert {
-  @apply border-l-4 pl-4 py-2 my-4 rounded-r;
+  @apply my-4 rounded-r border-l-4 py-2 pl-4;
 }
 
 .markdown-alert-note {
@@ -177,7 +177,8 @@ pre.prose code {
 .prose details summary {
   cursor: pointer;
   user-select: none;
-  transition: color var(--theme-transition-duration) var(--theme-transition-timing-function);
+  transition: color var(--theme-transition-duration)
+    var(--theme-transition-timing-function);
 }
 
 .prose details summary:hover {

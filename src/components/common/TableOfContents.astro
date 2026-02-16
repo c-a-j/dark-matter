@@ -10,84 +10,85 @@ type Props = {
 const { headings = [], class: customClass, numberH2 = false } = Astro.props;
 
 // Only include h2/h3 for brevity
-const filtered = headings.filter((h) => h.depth === 2 || h.depth === 3);
+const filtered = headings.filter(h => h.depth === 2 || h.depth === 3);
 
 // Number H2 headings if numberH2 is true
 let h2Counter = 0;
-const numberedHeadings = filtered.map((h) => {
+const numberedHeadings = filtered.map(h => {
   if (h.depth === 2 && numberH2) {
     h2Counter++;
     return {
       ...h,
-      text: `${h2Counter}. ${h.text}`
+      text: `${h2Counter}. ${h.text}`,
     };
   }
   return h;
 });
 ---
 
-<aside class:list={[
-  "hidden", 
-  "md:block", 
-  "md:sticky", 
-  "md:top-40", 
-  "md:max-h-[calc(100vh-8rem)]", 
-  "md:overflow-auto", customClass]} 
-  aria-label="Table of contents">
-  {filtered.length > 0 && (
-    <nav class="pr-2">
-      <ul class="space-y-1 text-sm">
-        {numberedHeadings.map((h) => (
-          <li class:list={[h.depth === 3 ? "pl-4" : "pl-0"]}>
-            <a 
-              href={"#" + h.slug} 
-              class="toc-link block py-1 transition-colors duration-200 hover-unmute"
-              data-target={h.slug}
-            >
-              {h.text}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </nav>
-  )}
-  {filtered.length === 0 && (
-    <div class="hidden"></div>
-  )}
-  
+<aside
+  class:list={[
+    "hidden",
+    "md:block",
+    "md:sticky",
+    "md:top-40",
+    "md:max-h-[calc(100vh-8rem)]",
+    "md:overflow-auto",
+    customClass,
+  ]}
+  aria-label="Table of contents"
+>
+  {
+    filtered.length > 0 && (
+      <nav class="pr-2">
+        <ul class="space-y-1 text-sm">
+          {numberedHeadings.map(h => (
+            <li class:list={[h.depth === 3 ? "pl-4" : "pl-0"]}>
+              <a
+                href={"#" + h.slug}
+                class="toc-link hover-unmute block py-1 transition-colors duration-200"
+                data-target={h.slug}
+              >
+                {h.text}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    )
+  }
+  {filtered.length === 0 && <div class="hidden" />}
+
   <script>
     function updateActiveTOCLink() {
-      const headings = document.querySelectorAll('h2, h3');
-      const tocLinks = document.querySelectorAll('.toc-link');
-      
-      let current = '';
-      
-      headings.forEach((heading) => {
+      const headings = document.querySelectorAll("h2, h3");
+      const tocLinks = document.querySelectorAll(".toc-link");
+
+      let current = "";
+
+      headings.forEach(heading => {
         const rect = heading.getBoundingClientRect();
         if (rect.top <= 100) {
           current = heading.id;
         }
       });
-      
-      tocLinks.forEach((link) => {
-        if (link.getAttribute('data-target') === current) {
+
+      tocLinks.forEach(link => {
+        if (link.getAttribute("data-target") === current) {
           // Add active state
-          link.classList.remove('hover-unmute');
-          link.classList.add('text-theme-dark', 'dark:text-theme-light');
+          link.classList.remove("hover-unmute");
+          link.classList.add("text-theme-dark", "dark:text-theme-light");
         } else {
-          link.classList.remove('text-theme-dark', 'dark:text-theme-light');
-          link.classList.add('hover-unmute');
+          link.classList.remove("text-theme-dark", "dark:text-theme-light");
+          link.classList.add("hover-unmute");
         }
-        
       });
     }
-    
+
     // Update on scroll
-    window.addEventListener('scroll', updateActiveTOCLink);
-    
+    window.addEventListener("scroll", updateActiveTOCLink);
+
     // Update on page load
-    document.addEventListener('DOMContentLoaded', updateActiveTOCLink);
+    document.addEventListener("DOMContentLoaded", updateActiveTOCLink);
   </script>
 </aside>
-
-

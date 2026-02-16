@@ -6,7 +6,10 @@
     "dev": "astro dev",
     "build": "astro build && pagefind",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "dependencies": {
     "@tabler/icons": "^3.36.1",
@@ -17,5 +20,15 @@
     "rehype-external-links": "^3.0.0",
     "remark-github-markdown-alerts": "^1.2.1",
     "tailwindcss": "^4.1.11"
+  },
+  "devDependencies": {
+    "@typescript-eslint/parser": "^8.56.0",
+    "eslint": "^10.0.0",
+    "eslint-plugin-astro": "^1.6.0",
+    "globals": "^17.3.0",
+    "prettier": "^3.8.1",
+    "prettier-plugin-astro": "^0.14.1",
+    "prettier-plugin-tailwindcss": "^0.7.2",
+    "typescript-eslint": "^8.56.0"
   }
 }

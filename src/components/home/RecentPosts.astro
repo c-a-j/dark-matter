@@ -4,29 +4,37 @@ import Anchor from "../common/Anchor.astro";
 import { getFeaturedPosts } from "../../lib/utils";
 import { getUrl } from "../../lib/utils";
 
-const recentPosts = (await getFeaturedPosts("posts"))
+const recentPosts = await getFeaturedPosts("posts");
 ---
 
-{recentPosts.length > 0 && (
-<div class="space-y-0 mb-20">
-  <div class="flex justify-between items-center pb-5">
-    <h2 class="text-3xl sm:text-4xl font-display text-theme-dark dark:text-theme-light">Recent Posts</h2>
-    <Anchor url={getUrl("blog")} additonalClasses="text-theme-dark-muted dark:text-theme-light-muted hover:text-theme-accent-dark-muted dark:hover:text-theme-accent-light-muted transition-colors hidden md:block" hoverUnderline>
-      View all posts →
-    </Anchor>
-  </div>
-  
-  <div class="space-y-6">
-    {recentPosts.map((post) => (
-      <PostSnippet
-        title={post.title}
-        description={post.description}
-        url={post.url}
-        tags={post.tags}
-        published={post.published}
-        updated={post.updated}
-      />
-    ))}
-  </div>
-</div>
-)}
+{
+  recentPosts.length > 0 && (
+    <div class="mb-20 space-y-0">
+      <div class="flex items-center justify-between pb-5">
+        <h2 class="font-display text-3xl text-theme-dark sm:text-4xl dark:text-theme-light">
+          Recent Posts
+        </h2>
+        <Anchor
+          url={getUrl("blog")}
+          additonalClasses="text-theme-dark-muted dark:text-theme-light-muted hover:text-theme-accent-dark-muted dark:hover:text-theme-accent-light-muted transition-colors hidden md:block"
+          hoverUnderline
+        >
+          View all posts →
+        </Anchor>
+      </div>
+
+      <div class="space-y-6">
+        {recentPosts.map(post => (
+          <PostSnippet
+            title={post.title}
+            description={post.description}
+            url={post.url}
+            tags={post.tags}
+            published={post.published}
+            updated={post.updated}
+          />
+        ))}
+      </div>
+    </div>
+  )
+}

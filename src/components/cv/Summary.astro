@@ -6,10 +6,12 @@ export interface Props {
 }
 
 const { content } = Astro.props;
-const title = "Summary"
+const title = "Summary";
 ---
 
-<div class="relative text-theme-dark dark:text-theme-light theme-transition flex flex-col gap-3 mb-8">
+<div
+  class="relative mb-8 flex flex-col gap-3 text-theme-dark theme-transition dark:text-theme-light"
+>
   <SectionHeader title={title} />
   <span class="ml-4">
     {content}

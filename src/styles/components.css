@@ -39,12 +39,30 @@
   }
 
   @keyframes blink {
-    0%, 10% { opacity: 1; }
-    11%, 20% { opacity: 0; }
-    21%, 30% { opacity: 1; }
-    31%, 40% { opacity: 0; }
-    41%, 50% { opacity: 1; }
-    51%, 100% { opacity: 0; }
+    0%,
+    10% {
+      opacity: 1;
+    }
+    11%,
+    20% {
+      opacity: 0;
+    }
+    21%,
+    30% {
+      opacity: 1;
+    }
+    31%,
+    40% {
+      opacity: 0;
+    }
+    41%,
+    50% {
+      opacity: 1;
+    }
+    51%,
+    100% {
+      opacity: 0;
+    }
   }
 }
 
@@ -57,7 +75,7 @@
   }
 
   .hover-underline::after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: var(--underline-bottom, -2px);
     left: 0;
@@ -80,7 +98,8 @@
   .hover-underline.nav {
     --underline-bottom: -4px;
     color: var(--color-theme-dark);
-    transition: color var(--theme-transition-duration) var(--theme-transition-timing-function);
+    transition: color var(--theme-transition-duration)
+      var(--theme-transition-timing-function);
   }
 
   .hover-underline.nav::after {
@@ -108,7 +127,8 @@
 @layer base {
   a.anchor {
     color: var(--color-theme-accent-dark);
-    transition: color var(--theme-transition-duration) var(--theme-transition-timing-function);
+    transition: color var(--theme-transition-duration)
+      var(--theme-transition-timing-function);
   }
 
   :where(.dark, .dark *) a.anchor {
@@ -142,15 +162,18 @@
 /* Tag styling */
 @layer base {
   .tag {
-    @apply px-2 py-1 text-sm font-semibold opacity-80 hover:opacity-90 cursor-pointer;
+    @apply cursor-pointer px-2 py-1 text-sm font-semibold opacity-80 hover:opacity-90;
     position: relative;
     color: var(--color-theme-light);
     background-color: var(--color-theme-dark-muted);
     box-shadow: none;
     white-space: nowrap;
-    transition: all 0.2s ease,
-                background-color var(--theme-transition-duration) var(--theme-transition-timing-function),
-                color var(--theme-transition-duration) var(--theme-transition-timing-function);
+    transition:
+      all 0.2s ease,
+      background-color var(--theme-transition-duration)
+        var(--theme-transition-timing-function),
+      color var(--theme-transition-duration)
+        var(--theme-transition-timing-function);
   }
 
   .tag:hover {
@@ -167,7 +190,7 @@
 /* Theme toggle */
 @layer base {
   .theme-toggle {
-    @apply w-3 h-3 rounded-full cursor-pointer hover:scale-110 transition-transform duration-200;
+    @apply h-3 w-3 cursor-pointer rounded-full transition-transform duration-200 hover:scale-110;
     background-color: var(--color-theme-dark);
   }
 
@@ -178,7 +201,7 @@
 
 /* Tabbed code blocks */
 .tabbed-code-blocks {
-  @apply my-6 rounded-lg overflow-hidden;
+  @apply my-6 overflow-hidden rounded-lg;
   background-color: var(--color-theme-light-muted);
   border: 1px solid var(--color-theme-light-muted);
 }
@@ -195,7 +218,7 @@
 }
 
 .tabbed-code-tab {
-  @apply px-4 py-3 text-sm font-medium cursor-pointer transition-all duration-200;
+  @apply cursor-pointer px-4 py-3 text-sm font-medium transition-all duration-200;
   background-color: transparent;
   color: var(--color-theme-light-muted);
   border: none;
@@ -238,6 +261,6 @@
 }
 
 .tabbed-code-content code {
-  @apply p-0 bg-transparent;
+  @apply bg-transparent p-0;
   background-color: transparent;
 }

@@ -2,24 +2,35 @@
 import SectionHeader from "./SectionHeader.astro";
 import type { Education } from "../../lib/cv.types";
 
-const title = "Education"
+const title = "Education";
 
 export type Props = {
-  education: Education
+  education: Education;
 };
 
 const { education } = Astro.props;
 ---
 
-<div class="relative text-theme-dark dark:text-theme-light theme-transition flex flex-col gap-3 mb-8">
+<div
+  class="relative mb-8 flex flex-col gap-3 text-theme-dark theme-transition dark:text-theme-light"
+>
   <SectionHeader title={title} />
-  {education.degrees.map(degree => (
-    <div class="flex flex-col ml-4">
-      <span class="font-medium">{degree.school}</span>
-      <div class="flex justify-between items-center">
-        <span><strong>{degree.title}</strong>{degree.honors && <>, <em>{degree.honors}</em></>}</span>
-        <span>{degree.dateObtained}</span>
+  {
+    education.degrees.map(degree => (
+      <div class="ml-4 flex flex-col">
+        <span class="font-medium">{degree.school}</span>
+        <div class="flex items-center justify-between">
+          <span>
+            <strong>{degree.title}</strong>
+            {degree.honors && (
+              <>
+                , <em>{degree.honors}</em>
+              </>
+            )}
+          </span>
+          <span>{degree.dateObtained}</span>
+        </div>
       </div>
-    </div>
-  ))}
+    ))
+  }
 </div>

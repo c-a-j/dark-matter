@@ -7,7 +7,12 @@ import SEO from "../../components/common/SEO.astro";
 <Layout>
   <Fragment slot="head">
     <SEO configKey="search" />
-    <link rel="stylesheet" href={import.meta.env.DEV ? '/dist/pagefind/pagefind-ui.css' : "/pagefind/pagefind-ui.css"} >
+    <link
+      rel="stylesheet"
+      href={import.meta.env.DEV
+        ? "/dist/pagefind/pagefind-ui.css"
+        : "/pagefind/pagefind-ui.css"}
+    />
     <style>
       /* Custom Pagefind styling */
       :root {
@@ -20,7 +25,7 @@ import SEO from "../../components/common/SEO.astro";
         --pagefind-ui-tag: #e5e7eb;
         --pagefind-ui-border-width: 1px;
         --pagefind-ui-border-radius: 8px;
-        --pagefind-ui-font: var(--font-mono, 'IBM Plex Mono', monospace);
+        --pagefind-ui-font: var(--font-mono, "IBM Plex Mono", monospace);
         --pagefind-ui-font-size: 16px;
         --pagefind-ui-line-height: 1.5;
         --pagefind-ui-font-weight: 400;
@@ -48,8 +53,11 @@ import SEO from "../../components/common/SEO.astro";
         --pagefind-ui-success: #10b981;
         --pagefind-ui-warning: #f59e0b;
         --pagefind-ui-info: #3b82f6;
-        --pagefind-ui-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-        --pagefind-ui-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        --pagefind-ui-shadow:
+          0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+        --pagefind-ui-shadow-lg:
+          0 10px 15px -3px rgba(0, 0, 0, 0.1),
+          0 4px 6px -2px rgba(0, 0, 0, 0.05);
       }
 
       /* Dark mode support */
@@ -68,24 +76,24 @@ import SEO from "../../components/common/SEO.astro";
     </style>
   </Fragment>
   <Section class="mt-16">
-    <div class="text-center mb-12">
-      <h1 class="text-3xl sm:text-4xl font-display pb-4">
-        Search
-      </h1>
+    <div class="mb-12 text-center">
+      <h1 class="pb-4 font-display text-3xl sm:text-4xl">Search</h1>
     </div>
-    
+
     <div id="search"></div>
   </Section>
 </Layout>
 
 <script is:inline define:vars={{ isDev: import.meta.env.DEV }}>
   // Simple Pagefind initialization
-  window.addEventListener('load', function() {
-    console.log('Page loading, initializing search...');
-    const script = document.createElement('script');
-    script.src = isDev ? '/dist/pagefind/pagefind-ui.js' : "/pagefind/pagefind-ui.js";
-    script.onload = function() {
-      console.log('Pagefind UI script loaded successfully');
+  window.addEventListener("load", function () {
+    console.log("Page loading, initializing search...");
+    const script = document.createElement("script");
+    script.src = isDev
+      ? "/dist/pagefind/pagefind-ui.js"
+      : "/pagefind/pagefind-ui.js";
+    script.onload = function () {
+      console.log("Pagefind UI script loaded successfully");
       const pagefindUI = new PagefindUI({
         element: "#search",
         showImages: false,
@@ -103,43 +111,45 @@ import SEO from "../../components/common/SEO.astro";
           many_results: "Found results for",
           one_result: "Found result for",
           alt_search: "No results found for. Showing results for instead",
-          search_suggestion: "No results found for. Try a different search term",
+          search_suggestion:
+            "No results found for. Try a different search term",
           searching: "Searching for",
-        }
+        },
       });
 
       // Add link hover classes to Pagefind result links for underline effect
       function addLinkUnderlineEffect() {
-        const links = document.querySelectorAll('.pagefind-ui__result-link');
-        
+        const links = document.querySelectorAll(".pagefind-ui__result-link");
+
         links.forEach(link => {
           // Remove Pagefind's default underline styles
-          link.style.setProperty('text-decoration', 'none', 'important');
-          
+          link.style.setProperty("text-decoration", "none", "important");
+
           // Add both the base link-hover class and the specific pagefind class
-          link.classList.add('link-hover', 'pagefind-link-hover');
+          link.classList.add("link-hover", "pagefind-link-hover");
         });
       }
 
       // Apply underline effect after Pagefind loads and watch for changes
       setTimeout(addLinkUnderlineEffect, 200);
-      
-      const observer = new MutationObserver(function(mutations) {
-        mutations.forEach(function(mutation) {
-          if (mutation.type === 'childList') {
+
+      const observer = new MutationObserver(function (mutations) {
+        mutations.forEach(function (mutation) {
+          if (mutation.type === "childList") {
             setTimeout(addLinkUnderlineEffect, 100);
           }
         });
       });
 
-      const searchContainer = document.getElementById('search');
+      const searchContainer = document.getElementById("search");
       if (searchContainer) {
         observer.observe(searchContainer, { childList: true, subtree: true });
       }
     };
-    script.onerror = function() {
-      console.error('Failed to load Pagefind UI');
-      document.getElementById('search').innerHTML = '<p class="text-center text-red-600">Failed to load search. Please refresh the page.</p>';
+    script.onerror = function () {
+      console.error("Failed to load Pagefind UI");
+      document.getElementById("search").innerHTML =
+        '<p class="text-center text-red-600">Failed to load search. Please refresh the page.</p>';
     };
     document.head.appendChild(script);
   });

@@ -16,7 +16,6 @@ import PostPaginate from "../components/common/PostPaginate.astro";
 import type { collections } from "../content.config";
 import type { PaginationInfo } from "../components/common/PostPaginate.astro";
 
-
 type Props = {
   frontmatter: PostFrontmatter;
   headings?: MarkdownHeading[];
@@ -44,7 +43,7 @@ const paginate = frontmatter.paginate;
   </Fragment>
   <div class="mx-auto max-w-6xl">
     <div class="flex flex-row gap-8">
-      <div class="flex-1 min-w-0">
+      <div class="min-w-0 flex-1">
         <Section class="pt-8">
           {isDev && isDraft && <DraftBox />}
           <ContentLayoutHeader
@@ -70,7 +69,7 @@ const paginate = frontmatter.paginate;
       </div>
       {
         !hideTOC && (
-          <div class="hidden xl:block w-80 flex-shrink-0">
+          <div class="hidden w-80 flex-shrink-0 xl:block">
             <TableOfContents headings={headings} numberH2={numberH2} />
           </div>
         )

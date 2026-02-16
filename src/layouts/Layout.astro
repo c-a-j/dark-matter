@@ -6,7 +6,6 @@ import "../styles/global.css";
 import { siteConfig } from "../site.config";
 import { getUrl } from "../lib/utils";
 
-
 const defaultTheme = siteConfig.site.defaultTheme ?? "dark";
 const allowThemeToggle = siteConfig.site.allowThemeToggle ?? true;
 ---
@@ -23,34 +22,42 @@ const allowThemeToggle = siteConfig.site.allowThemeToggle ?? true;
       href="https://fonts.bunny.net/css?family=ibm-plex-mono:400,400i,500,500i,600,600i,700,700i"
       rel="stylesheet"
     />
-    
+
     <!-- Theme detection script - runs before page renders -->
-      <script is:inline define:vars={{ defaultTheme, allowThemeToggle }}>
-        const theme = (() => {
-          if (!allowThemeToggle && (defaultTheme === "light" || defaultTheme === "dark")) {
-            return defaultTheme;
-          }
-          if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
-            return localStorage.getItem("theme") ?? "light";
-          }
-          if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-            return "dark";
-          }
-          return "light";
-        })();
-
-        if (theme === "light") {
-          document.documentElement.classList.remove("dark");
-        } else {
-          document.documentElement.classList.add("dark");
+    <script is:inline define:vars={{ defaultTheme, allowThemeToggle }}>
+      const theme = (() => {
+        if (
+          !allowThemeToggle &&
+          (defaultTheme === "light" || defaultTheme === "dark")
+        ) {
+          return defaultTheme;
         }
+        if (
+          typeof localStorage !== "undefined" &&
+          localStorage.getItem("theme")
+        ) {
+          return localStorage.getItem("theme") ?? "light";
+        }
+        if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+          return "dark";
+        }
+        return "light";
+      })();
 
-        window.localStorage.setItem("theme", theme);
-      </script>
+      if (theme === "light") {
+        document.documentElement.classList.remove("dark");
+      } else {
+        document.documentElement.classList.add("dark");
+      }
+
+      window.localStorage.setItem("theme", theme);
+    </script>
 
     <slot name="head" />
   </head>
-  <body class="bg-theme-light dark:bg-theme-dark text-theme-dark dark:text-theme-light theme-transition font-mono min-h-screen flex flex-col justify-between">
+  <body
+    class="flex min-h-screen flex-col justify-between bg-theme-light font-mono text-theme-dark theme-transition dark:bg-theme-dark dark:text-theme-light"
+  >
     <div class="flex-1">
       <Header />
       <main class="mb-30">

@@ -11,17 +11,16 @@ export async function getStaticPaths() {
 const { entry: post } = Astro.props;
 const { Content, headings } = await render(post);
 
-const paginationInfo = await getPaginationInfo({ 
+const paginationInfo = await getPaginationInfo({
   url: Astro.url.pathname,
   collectionName: "posts",
   isSubcollection: post.data.isSubcollection,
 });
-
 ---
 
-<PostLayout 
-  frontmatter={post.data} 
-  headings={headings} 
+<PostLayout
+  frontmatter={post.data}
+  headings={headings}
   collectionName="posts"
   paginationInfo={paginationInfo}
 >

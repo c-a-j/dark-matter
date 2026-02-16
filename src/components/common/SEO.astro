@@ -6,43 +6,57 @@ export interface Props {
   type?: string;
 }
 
-const { 
-  configKey,
-  type
-} = Astro.props;
+const { configKey, type } = Astro.props;
 
-import { siteConfig } from "../../site.config"
+import { siteConfig } from "../../site.config";
 const k = configKey && configKey in siteConfig ? configKey : "global";
 const config = siteConfig[k as keyof typeof siteConfig] as MetaData;
-const allowSearch = config.allowSearch !== undefined ? config.allowSearch : true;
+const allowSearch =
+  config.allowSearch !== undefined ? config.allowSearch : true;
 
 // Get the current page URL for canonical and og:url
 // Use the full URL from Astro, removing trailing slash except for root
-const currentUrl = Astro.url.pathname.endsWith("/") && Astro.url.pathname !== "/"
-  ? Astro.url.href.slice(0, -1)
-  : Astro.url.href;
+const currentUrl =
+  Astro.url.pathname.endsWith("/") && Astro.url.pathname !== "/"
+    ? Astro.url.href.slice(0, -1)
+    : Astro.url.href;
 ---
 
-<title>{config.title ?? siteConfig.global.title}{config.titleSuffix ? ` • ${config.titleSuffix}` : ''}</title>
+<title>
+  {config.title ?? siteConfig.global.title}{
+    config.titleSuffix ? ` • ${config.titleSuffix}` : ""
+  }
+</title>
 <meta
   name="description"
   content={config.longDescription ?? config.description}
 />
-<meta property="og:title" content={`${config.title}${config.titleSuffix ? ` • ${config.titleSuffix}` : ''}`} />
+<meta
+  property="og:title"
+  content={`${config.title}${config.titleSuffix ? ` • ${config.titleSuffix}` : ""}`}
+/>
 <meta property="og:description" content={config.description} />
-{config.keywords && (
-  <meta name="keywords" content={config.keywords.join(", ")} />
-)}
-{!allowSearch && (
-  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex" />
-)}
+{
+  config.keywords && (
+    <meta name="keywords" content={config.keywords.join(", ")} />
+  )
+}
+{
+  !allowSearch && (
+    <meta
+      name="robots"
+      content="noindex, nofollow, noarchive, nosnippet, noimageindex"
+    />
+  )
+}
 <meta property="og:url" content={currentUrl} />
 <meta name="twitter:card" content={type} />
-<meta name="twitter:title" content={`${config.title}${config.titleSuffix ? ` • ${config.titleSuffix}` : ''}`} />
+<meta
+  name="twitter:title"
+  content={`${config.title}${config.titleSuffix ? ` • ${config.titleSuffix}` : ""}`}
+/>
 <meta name="twitter:description" content={config.description} />
-{config.cardImage && (
-  <meta name="twitter:image" content={config.cardImage} />
-)}
+{config.cardImage && <meta name="twitter:image" content={config.cardImage} />}
 <meta http-equiv="content-language" content="en" />
 <meta name="language" content="English" />
 <link rel="canonical" href={currentUrl} />

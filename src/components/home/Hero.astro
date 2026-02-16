@@ -1,17 +1,16 @@
 ---
 import { siteConfig } from "../../site.config";
 ---
-{siteConfig.site.showHomeHero && (
-  <div class="flex justify-left mb-20 mt-20">
-    <div class="flex flex-col items-left">
-      {siteConfig.homeHero.title.map((title: string) => (
-        <h1 class="text-6xl sm:text-5xl font-display pb-2">
-          {title}
-        </h1>
-      ))}
-      <span>
-        {siteConfig.homeHero.subtitle}
-      </span>
+
+{
+  siteConfig.site.showHomeHero && (
+    <div class="justify-left mt-20 mb-20 flex">
+      <div class="items-left flex flex-col">
+        {siteConfig.homeHero.title.map((title: string) => (
+          <h1 class="pb-2 font-display text-6xl sm:text-5xl">{title}</h1>
+        ))}
+        <span>{siteConfig.homeHero.subtitle}</span>
+      </div>
     </div>
-  </div>
-)}
+  )
+}

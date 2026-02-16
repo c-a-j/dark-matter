@@ -5,224 +5,254 @@
 <script is:inline>
   function initializeTabbedCodeBlocks() {
     // Find all pre elements
-    const preElements = document.querySelectorAll('pre');
+    const preElements = document.querySelectorAll("pre");
     const processedElements = new Set();
-    
+
     // First pass: mark pre elements that will be tabbed
     preElements.forEach((pre, index) => {
       if (processedElements.has(pre)) return;
-      
+
       // Check if this pre element is preceded by a <!-- tabs --> comment
       let prevSibling = pre.previousSibling;
-      
+
       // Skip text nodes to find the previous element
       while (prevSibling && prevSibling.nodeType === Node.TEXT_NODE) {
         prevSibling = prevSibling.previousSibling;
       }
-      
-      if (prevSibling && prevSibling.nodeType === Node.COMMENT_NODE && prevSibling.textContent.trim() === 'tabs') {
+
+      if (
+        prevSibling &&
+        prevSibling.nodeType === Node.COMMENT_NODE &&
+        prevSibling.textContent.trim() === "tabs"
+      ) {
         // Find all consecutive pre elements after this comment
         const consecutivePres = [pre];
         let current = pre;
-        
+
         while (true) {
           let nextSibling = current.nextSibling;
-          
+
           // Skip text nodes to find the next element
           while (nextSibling && nextSibling.nodeType === Node.TEXT_NODE) {
             nextSibling = nextSibling.nextSibling;
           }
-          
+
           // Check if we've reached an <!-- endtabs --> comment
-          if (nextSibling && nextSibling.nodeType === Node.COMMENT_NODE && nextSibling.textContent.trim() === 'endtabs') {
+          if (
+            nextSibling &&
+            nextSibling.nodeType === Node.COMMENT_NODE &&
+            nextSibling.textContent.trim() === "endtabs"
+          ) {
             break;
           }
-          
-          if (nextSibling && nextSibling.tagName === 'PRE') {
+
+          if (nextSibling && nextSibling.tagName === "PRE") {
             current = nextSibling;
             consecutivePres.push(current);
           } else {
             break;
           }
         }
-        
-            if (consecutivePres.length >= 1) {
-              // Mark all elements that will be tabbed
-              consecutivePres.forEach(p => {
-                p.setAttribute('data-will-be-tabbed', 'true');
-                processedElements.add(p);
-              });
-            }
+
+        if (consecutivePres.length >= 1) {
+          // Mark all elements that will be tabbed
+          consecutivePres.forEach(p => {
+            p.setAttribute("data-will-be-tabbed", "true");
+            processedElements.add(p);
+          });
+        }
       }
     });
-    
+
     // Second pass: create tabbed interfaces
-    const tabbedElements = document.querySelectorAll('pre[data-will-be-tabbed]');
+    const tabbedElements = document.querySelectorAll(
+      "pre[data-will-be-tabbed]"
+    );
     const processedTabbedElements = new Set();
-    
+
     tabbedElements.forEach((pre, index) => {
       if (processedTabbedElements.has(pre)) return;
-      
+
       // Find all consecutive pre elements in this group
       const consecutivePres = [pre];
       let current = pre;
-      
+
       while (true) {
         let nextSibling = current.nextSibling;
-        
+
         // Skip text nodes to find the next element
         while (nextSibling && nextSibling.nodeType === Node.TEXT_NODE) {
           nextSibling = nextSibling.nextSibling;
         }
-        
+
         // Check if we've reached an <!-- endtabs --> comment
-        if (nextSibling && nextSibling.nodeType === Node.COMMENT_NODE && nextSibling.textContent.trim() === 'endtabs') {
+        if (
+          nextSibling &&
+          nextSibling.nodeType === Node.COMMENT_NODE &&
+          nextSibling.textContent.trim() === "endtabs"
+        ) {
           break;
         }
-        
-        if (nextSibling && nextSibling.tagName === 'PRE' && nextSibling.hasAttribute('data-will-be-tabbed')) {
+
+        if (
+          nextSibling &&
+          nextSibling.tagName === "PRE" &&
+          nextSibling.hasAttribute("data-will-be-tabbed")
+        ) {
           current = nextSibling;
           consecutivePres.push(current);
         } else {
           break;
         }
       }
-      
-          if (consecutivePres.length >= 1) {
-            // Create tabbed interface for this group
-            createTabbedInterface(consecutivePres, `group-${index}`);
-            
-            // Mark all elements as processed
-            consecutivePres.forEach(p => processedTabbedElements.add(p));
-          }
+
+      if (consecutivePres.length >= 1) {
+        // Create tabbed interface for this group
+        createTabbedInterface(consecutivePres, `group-${index}`);
+
+        // Mark all elements as processed
+        consecutivePres.forEach(p => processedTabbedElements.add(p));
+      }
     });
   }
-  
+
   function createTabbedInterface(preElements, tabGroup) {
     const tabId = `tabbed-${tabGroup}`;
-    
+
     // Create the tabbed container
-    const container = document.createElement('div');
-    container.className = 'tabbed-code-blocks';
-    container.setAttribute('data-tabbed-id', tabId);
-    
+    const container = document.createElement("div");
+    container.className = "tabbed-code-blocks";
+    container.setAttribute("data-tabbed-id", tabId);
+
     // Create tabs header
-    const tabsHeader = document.createElement('div');
-    tabsHeader.className = 'tabbed-code-tabs';
-    
+    const tabsHeader = document.createElement("div");
+    tabsHeader.className = "tabbed-code-tabs";
+
     // Create content panels
-    const panelsContainer = document.createElement('div');
-    panelsContainer.className = 'tabbed-code-panels';
-    
+    const panelsContainer = document.createElement("div");
+    panelsContainer.className = "tabbed-code-panels";
+
     // Create tabs and panels
     preElements.forEach((pre, index) => {
-      const codeElement = pre.querySelector('code');
-      const language = codeElement?.className.match(/language-(\w+)/)?.[1] || 
-                      codeElement?.getAttribute('class')?.match(/language-(\w+)/)?.[1] ||
-                      pre.getAttribute('data-language') ||
-                      'text';
-      
-      
+      const codeElement = pre.querySelector("code");
+      const language =
+        codeElement?.className.match(/language-(\w+)/)?.[1] ||
+        codeElement?.getAttribute("class")?.match(/language-(\w+)/)?.[1] ||
+        pre.getAttribute("data-language") ||
+        "text";
+
       // Create tab button
-      const tabButton = document.createElement('button');
-      tabButton.className = `tabbed-code-tab ${index === 0 ? 'active' : ''}`;
-      tabButton.setAttribute('data-tab', index.toString());
-      tabButton.setAttribute('data-tabbed-id', tabId);
-      tabButton.type = 'button';
+      const tabButton = document.createElement("button");
+      tabButton.className = `tabbed-code-tab ${index === 0 ? "active" : ""}`;
+      tabButton.setAttribute("data-tab", index.toString());
+      tabButton.setAttribute("data-tabbed-id", tabId);
+      tabButton.type = "button";
       tabButton.textContent = language;
       tabsHeader.appendChild(tabButton);
-      
+
       // Create panel
-      const panel = document.createElement('div');
-      panel.className = `tabbed-code-content ${index === 0 ? 'active' : ''}`;
-      panel.setAttribute('data-tab', index.toString());
-      panel.setAttribute('data-tabbed-id', tabId);
-      
+      const panel = document.createElement("div");
+      panel.className = `tabbed-code-content ${index === 0 ? "active" : ""}`;
+      panel.setAttribute("data-tab", index.toString());
+      panel.setAttribute("data-tabbed-id", tabId);
+
       // Clone the original pre element
       const preClone = pre.cloneNode(true);
       panel.appendChild(preClone);
       panelsContainer.appendChild(panel);
     });
-    
+
     container.appendChild(tabsHeader);
     container.appendChild(panelsContainer);
-    
+
     // Remove the <!-- tabs --> comment if it exists
     const firstPre = preElements[0];
     let prevSibling = firstPre.previousSibling;
-    
+
     // Skip text nodes to find the previous element
     while (prevSibling && prevSibling.nodeType === Node.TEXT_NODE) {
       prevSibling = prevSibling.previousSibling;
     }
-    
-    if (prevSibling && prevSibling.nodeType === Node.COMMENT_NODE && prevSibling.textContent.trim() === 'tabs') {
+
+    if (
+      prevSibling &&
+      prevSibling.nodeType === Node.COMMENT_NODE &&
+      prevSibling.textContent.trim() === "tabs"
+    ) {
       prevSibling.remove();
     }
-    
+
     // Remove the <!-- endtabs --> comment if it exists
     const lastPre = preElements[preElements.length - 1];
     let nextSibling = lastPre.nextSibling;
-    
+
     // Skip text nodes to find the next element
     while (nextSibling && nextSibling.nodeType === Node.TEXT_NODE) {
       nextSibling = nextSibling.nextSibling;
     }
-    
-    if (nextSibling && nextSibling.nodeType === Node.COMMENT_NODE && nextSibling.textContent.trim() === 'endtabs') {
+
+    if (
+      nextSibling &&
+      nextSibling.nodeType === Node.COMMENT_NODE &&
+      nextSibling.textContent.trim() === "endtabs"
+    ) {
       nextSibling.remove();
     }
-    
+
     // Replace the first pre element with the tabbed interface
     firstPre.parentNode?.replaceChild(container, firstPre);
-    
+
     // Remove the other pre elements
     preElements.slice(1).forEach(pre => {
       pre.remove();
     });
-    
+
     // Add click handlers only if there are multiple tabs
-    const tabs = container.querySelectorAll('.tabbed-code-tab');
-    const contents = container.querySelectorAll('.tabbed-code-content');
-    
+    const tabs = container.querySelectorAll(".tabbed-code-tab");
+    const contents = container.querySelectorAll(".tabbed-code-content");
+
     if (tabs.length > 1) {
-      tabs.forEach((tab) => {
-        tab.addEventListener('click', () => {
-          const targetTab = tab.getAttribute('data-tab');
-          
+      tabs.forEach(tab => {
+        tab.addEventListener("click", () => {
+          const targetTab = tab.getAttribute("data-tab");
+
           // Remove active class from all tabs and contents
-          tabs.forEach(t => t.classList.remove('active'));
-          contents.forEach(c => c.classList.remove('active'));
-          
+          tabs.forEach(t => t.classList.remove("active"));
+          contents.forEach(c => c.classList.remove("active"));
+
           // Add active class to clicked tab and corresponding content
-          tab.classList.add('active');
-          const targetContent = container.querySelector(`[data-tab="${targetTab}"].tabbed-code-content`);
+          tab.classList.add("active");
+          const targetContent = container.querySelector(
+            `[data-tab="${targetTab}"].tabbed-code-content`
+          );
           if (targetContent) {
-            targetContent.classList.add('active');
+            targetContent.classList.add("active");
           }
-          
+
           // Store the active tab in localStorage
           localStorage.setItem(`tabbed-code-${tabId}`, targetTab);
         });
       });
     } else {
       // For single tabs, make them non-clickable
-      tabs.forEach((tab) => {
-        tab.style.cursor = 'default';
-        tab.setAttribute('disabled', 'true');
+      tabs.forEach(tab => {
+        tab.style.cursor = "default";
+        tab.setAttribute("disabled", "true");
       });
     }
-    
+
     // Restore saved tab
     const savedTab = localStorage.getItem(`tabbed-code-${tabId}`);
     if (savedTab) {
-      const savedTabElement = container.querySelector(`[data-tab="${savedTab}"].tabbed-code-tab`);
+      const savedTabElement = container.querySelector(
+        `[data-tab="${savedTab}"].tabbed-code-tab`
+      );
       if (savedTabElement) {
         savedTabElement.click();
       }
     }
   }
-  
+
   // Initialize when DOM is ready
   setTimeout(() => {
     initializeTabbedCodeBlocks();

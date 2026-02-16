@@ -3,14 +3,19 @@ import { getUrl } from "../../lib/utils";
 export type Props = {
   tags?: string[];
 };
-const { tags } = Astro.props
+const { tags } = Astro.props;
 ---
 
 <div class="flex flex-row flex-wrap gap-2">
   {
-    tags?.map((tag) => (
-      <a 
-        href={getUrl(`tags/${tag.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '')}`)}
+    tags?.map(tag => (
+      <a
+        href={getUrl(
+          `tags/${tag
+            .toLowerCase()
+            .replace(/\s+/g, "-")
+            .replace(/[^\w-]/g, "")}`
+        )}
         class="tag"
       >
         {tag}

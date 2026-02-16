@@ -30,7 +30,7 @@ const numberH2 = frontmatter.numberH2;
   </Fragment>
   <div class="mx-auto max-w-6xl">
     <div class="flex flex-row gap-8">
-      <div class="flex-1 min-w-0">
+      <div class="min-w-0 flex-1">
         <Section class="pt-8">
           {isDev && isDraft && <DraftBox />}
           <ContentLayoutHeader
@@ -45,7 +45,7 @@ const numberH2 = frontmatter.numberH2;
           <Signature />
         </Section>
       </div>
-      <div class="hidden xl:block w-80 flex-shrink-0">
+      <div class="hidden w-80 flex-shrink-0 xl:block">
         <TableOfContents headings={headings} numberH2={numberH2} />
       </div>
     </div>

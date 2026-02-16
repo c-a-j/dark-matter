@@ -2,7 +2,7 @@
 import Layout from "../../layouts/Layout.astro";
 import Section from "../../components/common/Section.astro";
 import SEO from "../../components/common/SEO.astro";
-import { siteConfig } from "../../site.config"
+import { siteConfig } from "../../site.config";
 import Hero from "../../components/common/Hero.astro";
 import Blurb from "../../components/about/Blurb.astro";
 ---
@@ -12,11 +12,11 @@ import Blurb from "../../components/about/Blurb.astro";
     <SEO configKey="about" />
   </Fragment>
   <Section class="my-16">
-    <Hero 
-      title={siteConfig.aboutHero.title} 
-      subtitle={siteConfig.aboutHero.subtitle} 
-      image={siteConfig.aboutHero.image} 
+    <Hero
+      title={siteConfig.aboutHero.title}
+      subtitle={siteConfig.aboutHero.subtitle}
+      image={siteConfig.aboutHero.image}
     />
-    <Blurb/>
+    <Blurb />
   </Section>
 </Layout>

@@ -8,13 +8,14 @@ export type Props = {
   hoverUnmute?: boolean;
 };
 
-const { url, external, additonalClasses, hoverUnderline, hoverUnmute } = Astro.props;
+const { url, external, additonalClasses, hoverUnderline, hoverUnmute } =
+  Astro.props;
 ---
 
 <a
   href={url}
   class:list={[
-    "font-medium flex items-center",
+    "flex items-center font-medium",
     additonalClasses,
     "anchor",
     hoverUnmute ? "hover-unmute" : "fill-theme-dark dark:fill-theme-light",
@@ -29,7 +30,7 @@ const { url, external, additonalClasses, hoverUnderline, hoverUnmute } = Astro.p
     external ? (
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        class="w-6 h-6"
+        class="h-6 w-6"
         viewBox="0 0 512 512"
       >
         <path

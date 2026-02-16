@@ -4,25 +4,35 @@ import type { Position, Experience } from "../../lib/cv.types";
 import SectionHeader from "./SectionHeader.astro";
 
 export type Props = {
-  experience: Experience
+  experience: Experience;
 };
 
 const { experience } = Astro.props;
 ---
 
-<div class="relative text-theme-dark dark:text-theme-light theme-transition flex flex-col gap-3 mb-8">
+<div
+  class="relative mb-8 flex flex-col gap-3 text-theme-dark theme-transition dark:text-theme-light"
+>
   <SectionHeader title={experience.sectionTitle} />
-  {experience.positions.map((position: Position) => (
-    <div class="flex justify-between items-center ml-4">
-      <span><strong>{position.title}</strong>, {position.employer}</span>
-      <span>{position.startDate} - {position.endDate}</span>
-    </div>
-    <div class="ml-6 mb-4">
-      <ul class="list-disc list-inside">
-        {position.bullets.map(bullet => (
-          <li>{bullet}</li>
-        ))}
-      </ul>
-    </div>
-  ))}
+  {
+    experience.positions.map((position: Position) => (
+      <>
+        <div class="ml-4 flex items-center justify-between">
+          <span>
+            <strong>{position.title}</strong>, {position.employer}
+          </span>
+          <span>
+            {position.startDate} - {position.endDate}
+          </span>
+        </div>
+        <div class="mb-4 ml-6">
+          <ul class="list-inside list-disc">
+            {position.bullets.map(bullet => (
+              <li>{bullet}</li>
+            ))}
+          </ul>
+        </div>
+      </>
+    ))
+  }
 </div>

@@ -15,7 +15,7 @@ export const siteConfig = {
     base: "/dark-matter",
     showHomeHero: true,
     allowThemeToggle: true,
-    defaultTheme: "dark"
+    defaultTheme: "dark",
   },
   personal: {
     name: "John Doe",
@@ -28,7 +28,11 @@ export const siteConfig = {
     { name: "X", url: "https://twitter.com", icon: "brand-x" },
     { name: "LinkedIn", url: "https://linkedin.com/", icon: "brand-linkedin" },
     { name: "Facebook", url: "https://facebook.com/", icon: "brand-facebook" },
-    { name: "Instagram", url: "https://instagram.com/", icon: "brand-instagram" },
+    {
+      name: "Instagram",
+      url: "https://instagram.com/",
+      icon: "brand-instagram",
+    },
     { name: "Bluesky", url: "https://bsky.app/", icon: "brand-bluesky" },
     { name: "WhatsApp", url: "https://wa.me/", icon: "brand-whatsapp" },
     { name: "Telegram", url: "https://t.me/", icon: "brand-telegram" },
@@ -43,7 +47,7 @@ export const siteConfig = {
     description: "",
     longDescription: "",
     cardImage: "/card-image.webp",
-    keywords: ["web development", "design", "technology"]
+    keywords: ["web development", "design", "technology"],
   },
   posts: {
     titleSuffix: "Posts",
@@ -66,7 +70,7 @@ export const siteConfig = {
     cardImage: "/card-image.webp",
     keywords: ["web development", "design", "technology"],
     allowSearch: false,
-    publish: ["general", "template"] as string[]
+    publish: ["general", "template"] as string[],
   },
   search: {
     titleSuffix: "Search",
@@ -83,7 +87,12 @@ export const siteConfig = {
     cardImage: "/card-image.webp",
   },
   homeHero: {
-    title: ["Software Developer.", "Robotics Enthusiast.", "Olympic Athlete.", "Dork."],
+    title: [
+      "Software Developer.",
+      "Robotics Enthusiast.",
+      "Olympic Athlete.",
+      "Dork.",
+    ],
     subtitle: "This is a profound defining statement.",
   },
   aboutHero: {
@@ -97,7 +106,7 @@ export const siteConfig = {
     cvName: "cv",
     viewAll: "View All",
     noPosts: "No posts found.",
-    noProjects: "No projects found."
+    noProjects: "No projects found.",
   },
   menu: {
     // nav_bar_name: "path/to/page",
@@ -105,6 +114,6 @@ export const siteConfig = {
     projects: "projects",
     cv: "cv/general",
     about: "about",
-    search: "search"
-  }
+    search: "search",
+  },
 };

@@ -2,52 +2,55 @@
 import { siteConfig } from "../../site.config";
 ---
 
-{siteConfig.site.allowThemeToggle && (
-  <button 
-  id="theme-toggle" 
-  class="theme-toggle"
-  aria-label="Toggle theme"
->
-</button>
-)}
+{
+  siteConfig.site.allowThemeToggle && (
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" />
+  )
+}
 
 <script>
-  const themeToggle = document.getElementById('theme-toggle');
-  
+  const themeToggle = document.getElementById("theme-toggle");
+
   // Get initial theme from localStorage or system preference
   const getInitialTheme = () => {
-    const savedTheme = localStorage.getItem('theme');
+    const savedTheme = localStorage.getItem("theme");
     if (savedTheme) {
       return savedTheme;
     }
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    return window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
   };
-  
+
   // Apply theme to document
-  const applyTheme = (theme: 'light' | 'dark') => {
-    if (theme === 'dark') {
-      document.documentElement.classList.add('dark');
+  const applyTheme = (theme: "light" | "dark") => {
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
     } else {
-      document.documentElement.classList.remove('dark');
+      document.documentElement.classList.remove("dark");
     }
-    localStorage.setItem('theme', theme);
+    localStorage.setItem("theme", theme);
   };
-  
+
   // Initialize theme
-  const initialTheme = getInitialTheme() as 'light' | 'dark';
+  const initialTheme = getInitialTheme() as "light" | "dark";
   applyTheme(initialTheme);
-  
+
   // Toggle theme on click
-  themeToggle?.addEventListener('click', () => {
-    const currentTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
-    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  themeToggle?.addEventListener("click", () => {
+    const currentTheme = document.documentElement.classList.contains("dark")
+      ? "dark"
+      : "light";
+    const newTheme = currentTheme === "dark" ? "light" : "dark";
     applyTheme(newTheme);
   });
-  
+
   // Listen for system theme changes
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-    if (!localStorage.getItem('theme')) {
-      applyTheme(e.matches ? 'dark' : 'light');
-    }
-  });
+  window
+    .matchMedia("(prefers-color-scheme: dark)")
+    .addEventListener("change", e => {
+      if (!localStorage.getItem("theme")) {
+        applyTheme(e.matches ? "dark" : "light");
+      }
+    });
 </script>

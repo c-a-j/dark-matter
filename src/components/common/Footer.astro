@@ -11,25 +11,36 @@ for (let i = 10; i <= 70; i += 10) {
 ---
 
 <footer class="mb-0">
-  <div class="flex flex-col items-center text-theme-dark-muted dark:text-theme-light-muted gap-2 mb-2">
-    <div class="flex flex-row sm:flex-row gap-4">
-      {config.socialLinks.map((social) => (
-        <Anchor
-          url={social.url}
-          hoverUnderline={false}
-          aria-label={`${config.personal.name} ${social.name}`}
-          additonalClasses="text-theme-dark dark:text-theme-light group hover:text-theme-accent-dark dark:hover:text-theme-accent-light hover:fill-theme-accent-dark dark:hover:fill-theme-accent-light theme-transition"
-        >
-          <span class="inline-block transition-transform duration-200 ease-in-out group-hover:rotate-6">
-            <SocialIcon icon={social.icon} />
-          </span>
-        </Anchor>
-      ))}
+  <div
+    class="mb-2 flex flex-col items-center gap-2 text-theme-dark-muted dark:text-theme-light-muted"
+  >
+    <div class="flex flex-row gap-4 sm:flex-row">
+      {
+        config.socialLinks.map(social => (
+          <Anchor
+            url={social.url}
+            hoverUnderline={false}
+            aria-label={`${config.personal.name} ${social.name}`}
+            additonalClasses="text-theme-dark dark:text-theme-light group hover:text-theme-accent-dark dark:hover:text-theme-accent-light hover:fill-theme-accent-dark dark:hover:fill-theme-accent-light theme-transition"
+          >
+            <span class="inline-block transition-transform duration-200 ease-in-out group-hover:rotate-6">
+              <SocialIcon icon={social.icon} />
+            </span>
+          </Anchor>
+        ))
+      }
     </div>
   </div>
-  <div class="flex flex-col gap-0 mt-0 mb-0">
-    {opacities.map((o) => {
-      return <div class="h-3 bg-theme-dark dark:bg-theme-light" style={`opacity: ${o}%`}></div>
-    })}
+  <div class="mt-0 mb-0 flex flex-col gap-0">
+    {
+      opacities.map(o => {
+        return (
+          <div
+            class="h-3 bg-theme-dark dark:bg-theme-light"
+            style={`opacity: ${o}%`}
+          />
+        );
+      })
+    }
   </div>
 </footer>

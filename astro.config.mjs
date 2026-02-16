@@ -22,14 +22,22 @@ export default defineConfig({
   },
   markdown: {
     shikiConfig: {
-      theme: 'github-dark',
-      wrap: true
+      theme: "github-dark",
+      wrap: true,
     },
     gfm: true,
     smartypants: true,
-    remarkPlugins: [remarkGitHubAlerts, remarkCollapsible, remarkNowrap, remarkDisableAutolinks],
-        rehypePlugins: [
-          [rehypeExternalLinks, { target: '_blank', rel: ['noopener', 'noreferrer'] }]
-        ],
-  }
+    remarkPlugins: [
+      remarkGitHubAlerts,
+      remarkCollapsible,
+      remarkNowrap,
+      remarkDisableAutolinks,
+    ],
+    rehypePlugins: [
+      [
+        rehypeExternalLinks,
+        { target: "_blank", rel: ["noopener", "noreferrer"] },
+      ],
+    ],
+  },
 });

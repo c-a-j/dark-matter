@@ -1,22 +1,22 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import Section from "../../components/common/Section.astro";
 import SEO from "../../components/common/SEO.astro";
 import Hero from "../../components/common/Hero.astro";
-import Experience from "../../components/cv/Experience.astro"
-import Summary from "../../components/cv/Summary.astro"
-import Strengths from "../../components/cv/Strengths.astro"
-import Education from "../../components/cv/Education.astro"
-import NotFound from "../404.astro"
-import { siteConfig } from "../../site.config"
+import Experience from "../../components/cv/Experience.astro";
+import Summary from "../../components/cv/Summary.astro";
+import Strengths from "../../components/cv/Strengths.astro";
+import Education from "../../components/cv/Education.astro";
+import NotFound from "../404.astro";
+import { siteConfig } from "../../site.config";
 
 export async function getStaticPaths() {
   const cvEntries = await getCollection("cv");
-  
-  return cvEntries.map((entry) => ({
+
+  return cvEntries.map(entry => ({
     params: { id: entry.id },
-    props: { 
+    props: {
       cvData: entry.data,
       cvId: entry.id,
     },
@@ -26,27 +26,30 @@ export async function getStaticPaths() {
 const { cvData, cvId } = Astro.props;
 const isPublished = import.meta.env.DEV || siteConfig.cv.publish.includes(cvId);
 
-const { hero, summary, experience, otherExperience, education, strengths } = cvData;
+const { hero, summary, experience, otherExperience, education, strengths } =
+  cvData;
 ---
 
-{isPublished && (
-  <Layout>
-  <Fragment slot="head">
-    <SEO configKey="cv" />
-  </Fragment>
-  <Section class="my-16">
-    {hero && <Hero 
-      title={hero.title} 
-      subtitle={hero.subtitle} 
-      image={hero.image} 
-    />}
-    {summary && <Summary content={summary} />}
-    {strengths && <Strengths strengths={strengths} />}
-    {experience && <Experience experience={experience} />}
-    {education && <Education education={education}/>}
-    {otherExperience && <Experience experience={otherExperience} /> }
-  </Section>
-</Layout>
-) || (
-  <NotFound />
-)}
+{
+  (isPublished && (
+    <Layout>
+      <Fragment slot="head">
+        <SEO configKey="cv" />
+      </Fragment>
+      <Section class="my-16">
+        {hero && (
+          <Hero
+            title={hero.title}
+            subtitle={hero.subtitle}
+            image={hero.image}
+          />
+        )}
+        {summary && <Summary content={summary} />}
+        {strengths && <Strengths strengths={strengths} />}
+        {experience && <Experience experience={experience} />}
+        {education && <Education education={education} />}
+        {otherExperience && <Experience experience={otherExperience} />}
+      </Section>
+    </Layout>
+  )) || <NotFound />
+}

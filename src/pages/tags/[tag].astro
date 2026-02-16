@@ -12,20 +12,25 @@ export async function getStaticPaths() {
   // Get all collections
   const posts = await getPublishedCollection("posts");
   const projects = await getPublishedCollection("projects");
-  
+
   // Collect all unique tags
   const allTags = new Set<string>();
-  
+
   [...posts, ...projects].forEach(item => {
     if (item.entry.data.tags) {
       item.entry.data.tags.forEach((tag: string) => allTags.add(tag));
     }
   });
-  
+
   // Generate paths for each tag
   return Array.from(allTags).map(tag => ({
-    params: { tag: tag.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '') },
-    props: { tag }
+    params: {
+      tag: tag
+        .toLowerCase()
+        .replace(/\s+/g, "-")
+        .replace(/[^\w-]/g, ""),
+    },
+    props: { tag },
   }));
 }
 
@@ -33,21 +38,21 @@ const { tag } = Astro.props;
 const config = siteConfig;
 
 // Get all content with this tag
-const posts = (await getPublishedCollection("posts")).filter(post => 
-  post.entry.data.tags?.includes(tag)
-).map((post) => ({
-  ...post.entry.data,
-  url: getUrl(`blog/${post.entry.data.slug}`),
-  type: 'blog'
-}));
+const posts = (await getPublishedCollection("posts"))
+  .filter(post => post.entry.data.tags?.includes(tag))
+  .map(post => ({
+    ...post.entry.data,
+    url: getUrl(`blog/${post.entry.data.slug}`),
+    type: "blog",
+  }));
 
-const projects = (await getPublishedCollection("projects")).filter(project => 
-  project.entry.data.tags?.includes(tag)
-).map((project) => ({
-  ...project.entry.data,
-  url: getUrl(`projects/${project.entry.data.slug}`),
-  type: 'project'
-}));
+const projects = (await getPublishedCollection("projects"))
+  .filter(project => project.entry.data.tags?.includes(tag))
+  .map(project => ({
+    ...project.entry.data,
+    url: getUrl(`projects/${project.entry.data.slug}`),
+    type: "project",
+  }));
 
 // Combine all content and sort by date
 const allContent = [...posts, ...projects].sort((a, b) => {
@@ -61,17 +66,19 @@ const allContent = [...posts, ...projects].sort((a, b) => {
   <Fragment slot="head">
     <SEO />
   </Fragment>
-  
+
   <Section class="my-16">
-    <ContentHeader 
-      title={`Tag: ${tag}`} 
-      cursor={false} 
-    />
-    
-    {posts.length > 0 ? (
-      <TaggedPosts contentType="Posts" posts={posts} />
-    ) : null}
-    {projects.length > 0 ? (
-      <TaggedPosts contentType="Projects" posts={projects} />
-    ) : null}
-</Layout>
+    <ContentHeader title={`Tag: ${tag}`} cursor={false} />
+
+    {
+      posts.length > 0 ? (
+        <TaggedPosts contentType="Posts" posts={posts} />
+      ) : null
+    }
+    {
+      projects.length > 0 ? (
+        <TaggedPosts contentType="Projects" posts={projects} />
+      ) : null
+    }
+  </Section></Layout
+>
