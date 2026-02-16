@@ -13,15 +13,14 @@ theme's features will generally follow [my personal blog](https://var-log.dev).
 - responsive (mobile through desktop)
 - SEO-friendly (meta tags, canonical URLs, Open Graph)
 - light & dark mode with theme toggle
-- full-text search (Pagefind, build-time index)
+- search (Pagefind, build-time index)
 - draft posts & pagination
 - posts, projects, and CV content types
 - highly customizable (`site.config.ts`, content collections)
+- sitemap & RSS feed
 
 ### Planned
 
-- fuzzy search
-- sitemap & RSS feed
 - dynamic OG image generation for blog posts
 
 ## ✅ Lighthouse Score
