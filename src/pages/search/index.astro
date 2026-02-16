@@ -2,6 +2,10 @@
 import Layout from "../../layouts/Layout.astro";
 import Section from "../../components/common/Section.astro";
 import SEO from "../../components/common/SEO.astro";
+
+const baseUrl = import.meta.env.BASE_URL.endsWith("/")
+  ? import.meta.env.BASE_URL
+  : import.meta.env.BASE_URL + "/";
 ---
 
 <Layout>
@@ -10,8 +14,8 @@ import SEO from "../../components/common/SEO.astro";
     <link
       rel="stylesheet"
       href={import.meta.env.DEV
-        ? "/dist/pagefind/pagefind-ui.css"
-        : "/pagefind/pagefind-ui.css"}
+        ? `${baseUrl}dist/pagefind/pagefind-ui.css`
+        : `${baseUrl}pagefind/pagefind-ui.css`}
     />
     <style>
       /* Custom Pagefind styling */
@@ -84,20 +88,24 @@ import SEO from "../../components/common/SEO.astro";
   </Section>
 </Layout>
 
-<script is:inline define:vars={{ isDev: import.meta.env.DEV }}>
+<script is:inline define:vars={{ isDev: import.meta.env.DEV, baseUrl }}>
   // Simple Pagefind initialization
   window.addEventListener("load", function () {
     console.log("Page loading, initializing search...");
     const script = document.createElement("script");
     script.src = isDev
-      ? "/dist/pagefind/pagefind-ui.js"
-      : "/pagefind/pagefind-ui.js";
+      ? baseUrl + "dist/pagefind/pagefind-ui.js"
+      : baseUrl + "pagefind/pagefind-ui.js";
     script.onload = function () {
       console.log("Pagefind UI script loaded successfully");
+      const bundlePath = isDev
+        ? baseUrl + "dist/pagefind/"
+        : baseUrl + "pagefind/";
       const pagefindUI = new PagefindUI({
         element: "#search",
         showImages: false,
         resetStyles: false,
+        bundlePath: bundlePath,
         translations: {
           placeholder: "Search...",
           clear_search: "Clear",
