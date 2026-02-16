@@ -7,7 +7,7 @@ export type Props = {
 const { title, cursor = false } = Astro.props;
 ---
 
-<h1 class="text-3xl sm:text-4xl font-display pb-10 theme-text">
+<h1 class="text-3xl sm:text-4xl font-display pb-10 text-theme-dark dark:text-theme-light">
   {title}
   {cursor && <span class="cursor-blink">❚</span>}
 </h1>

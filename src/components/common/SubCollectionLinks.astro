@@ -13,7 +13,7 @@ const subCollectionPosts = await getSubCollection(collectionName, indexDirectory
 
 {subCollectionPosts.length > 0 && (
   <div class="mt-8">
-    <h2 class="text-2xl font-display theme-text mb-4">Contents</h2>
+    <h2 class="text-2xl font-display text-theme-dark dark:text-theme-light mb-4">Contents</h2>
     <ul class="space-y-2">
       {subCollectionPosts.map((post) => (
         <li>

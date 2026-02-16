@@ -73,9 +73,9 @@ const numberedHeadings = filtered.map((h) => {
         if (link.getAttribute('data-target') === current) {
           // Add active state
           link.classList.remove('hover-unmute');
-          link.classList.add('theme-text');
+          link.classList.add('text-theme-dark', 'dark:text-theme-light');
         } else {
-          link.classList.remove('theme-text');
+          link.classList.remove('text-theme-dark', 'dark:text-theme-light');
           link.classList.add('hover-unmute');
         }
         

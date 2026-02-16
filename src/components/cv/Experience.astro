@@ -10,7 +10,7 @@ export type Props = {
 const { experience } = Astro.props;
 ---
 
-<div class="relative theme-text theme-transition flex flex-col gap-3 mb-8">
+<div class="relative text-theme-dark dark:text-theme-light theme-transition flex flex-col gap-3 mb-8">
   <SectionHeader title={experience.sectionTitle} />
   {experience.positions.map((position: Position) => (
     <div class="flex justify-between items-center ml-4">

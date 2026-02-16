@@ -9,7 +9,7 @@ export type Props = {
 const { strengths } = Astro.props;
 ---
 
-<div class="relative theme-text theme-transition flex flex-col gap-3">
+<div class="relative text-theme-dark dark:text-theme-light theme-transition flex flex-col gap-3">
     <div class="ml-4">
         <ul class="cv-item-1 list-inside">
           {strengths.map(bullet => (

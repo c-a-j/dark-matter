@@ -1,0 +1,213 @@
+/* Hero image */
+@layer base {
+  .hero-image {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    filter: grayscale(100%);
+    border: 2px solid var(--color-theme-dark);
+    transition: filter 0.3s ease;
+  }
+
+  :where(.dark, .dark *) .hero-image {
+    border-color: var(--color-theme-light);
+  }
+}
+
+/* CV list styles */
+@layer base {
+  .cv-item-1 {
+    list-style-type: disc;
+    text-indent: -1.5rem;
+    padding-left: 1.5rem;
+  }
+
+  .cv-item-2 {
+    list-style-type: "- ";
+  }
+
+  .cv-item-3 {
+    list-style-type: circle;
+  }
+}
+
+/* Cursor blink animation */
+@layer base {
+  .cursor-blink {
+    animation: blink 10s infinite;
+  }
+
+  @keyframes blink {
+    0%, 10% { opacity: 1; }
+    11%, 20% { opacity: 0; }
+    21%, 30% { opacity: 1; }
+    31%, 40% { opacity: 0; }
+    41%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
+}
+
+/* Hover underline effect */
+@layer base {
+  .hover-underline {
+    position: relative;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .hover-underline::after {
+    content: '';
+    position: absolute;
+    bottom: var(--underline-bottom, -2px);
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: currentColor;
+    transition: width 0.3s ease;
+  }
+
+  @media (min-width: 768px) {
+    .hover-underline:hover::after {
+      width: 100%;
+    }
+  }
+
+  .hover-underline.nav {
+    --underline-bottom: -4px;
+  }
+
+  .hover-underline.nav.active::after {
+    width: 100%;
+  }
+
+  .hover-underline.anchor {
+    --underline-bottom: -2px;
+  }
+}
+
+/* Hover unmute: muted by default, full color on hover (desktop only) */
+@layer base {
+  .hover-unmute {
+    color: var(--color-theme-dark-muted);
+    fill: var(--color-theme-dark-muted) !important;
+    :where(.dark, .dark *) & {
+      color: var(--color-theme-light-muted);
+      fill: var(--color-theme-light-muted) !important;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .hover-unmute:hover {
+      color: var(--color-theme-dark);
+      fill: var(--color-theme-dark) !important;
+      :where(.dark, .dark *) & {
+        color: var(--color-theme-light);
+        fill: var(--color-theme-light) !important;
+      }
+    }
+  }
+}
+
+/* Tag styling */
+@layer base {
+  .tag {
+    @apply px-2 py-1 text-sm font-semibold opacity-80 hover:opacity-90 cursor-pointer;
+    position: relative;
+    color: var(--color-theme-light);
+    background-color: var(--color-theme-dark-muted);
+    box-shadow: none;
+    white-space: nowrap;
+    transition: all 0.2s ease,
+                background-color var(--theme-transition-duration) var(--theme-transition-timing-function),
+                color var(--theme-transition-duration) var(--theme-transition-timing-function);
+  }
+
+  .tag:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: 2px 2px 0 0 var(--color-theme-accent-light);
+  }
+
+  :where(.dark, .dark *) .tag {
+    color: var(--color-theme-dark);
+    background-color: var(--color-theme-light-muted);
+  }
+}
+
+/* Theme toggle */
+@layer base {
+  .theme-toggle {
+    @apply w-3 h-3 rounded-full cursor-pointer hover:scale-110 transition-transform duration-200;
+    background-color: var(--color-theme-dark);
+  }
+
+  :where(.dark, .dark *) .theme-toggle {
+    background-color: var(--color-theme-light);
+  }
+}
+
+/* Tabbed code blocks */
+.tabbed-code-blocks {
+  @apply my-6 rounded-lg overflow-hidden;
+  background-color: var(--color-theme-light-muted);
+  border: 1px solid var(--color-theme-light-muted);
+}
+
+:where(.dark, .dark *) .tabbed-code-blocks {
+  background-color: var(--color-theme-dark-muted);
+  border-color: var(--color-theme-dark-muted);
+}
+
+.tabbed-code-tabs {
+  @apply flex border-b;
+  border-color: var(--color-theme-light-muted);
+  background-color: var(--color-theme-dark-muted);
+}
+
+.tabbed-code-tab {
+  @apply px-4 py-3 text-sm font-medium cursor-pointer transition-all duration-200;
+  background-color: transparent;
+  color: var(--color-theme-light-muted);
+  border: none;
+  border-bottom: 2px solid transparent;
+  position: relative;
+}
+
+.tabbed-code-tab:hover {
+  color: var(--color-theme-light);
+}
+
+.tabbed-code-tab.active {
+  color: var(--color-theme-light);
+  border-bottom-color: var(--color-theme-accent-light);
+}
+
+.tabbed-code-tab[disabled] {
+  color: var(--color-theme-light);
+  cursor: default;
+  background-color: transparent;
+  pointer-events: none;
+  border-bottom: none;
+}
+
+.tabbed-code-panels {
+  position: relative;
+}
+
+.tabbed-code-content {
+  @apply hidden;
+}
+
+.tabbed-code-content.active {
+  @apply block;
+}
+
+.tabbed-code-content pre {
+  @apply m-0 rounded-none border-0;
+  background-color: transparent;
+}
+
+.tabbed-code-content code {
+  @apply p-0 bg-transparent;
+  background-color: transparent;
+}

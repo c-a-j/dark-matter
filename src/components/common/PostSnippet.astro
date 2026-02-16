@@ -18,7 +18,7 @@ const { title, description, url, tags, published, updated, repoUrl, demoUrl } = 
 const repoName = repoUrl?.includes("github") ? "GitHub" : repoUrl?.includes("gitlab") ? "GitLab" : "Repo";
 ---
 
-<div class="relative theme-text theme-transition flex flex-col gap-3 mb-8">
+<div class="relative text-theme-dark dark:text-theme-light theme-transition flex flex-col gap-3 mb-8">
   <div class="flex justify-between items-center">
     <Anchor url={url} additonalClasses="text-xl" hoverUnderline>
       {title}
@@ -33,8 +33,8 @@ const repoName = repoUrl?.includes("github") ? "GitHub" : repoUrl?.includes("git
         </span>
       </div>
     ) || (
-      <div class="flex flex-row gap-10 theme-muted hidden md:flex">
-        <span class="theme-muted theme-transition">
+      <div class="flex flex-row gap-10 text-theme-dark-muted dark:text-theme-light-muted hidden md:flex">
+        <span class="text-theme-dark-muted dark:text-theme-light-muted theme-transition">
           {published ? processDate(published) : null}
           {updated ? ` [${processDate(updated)}]` : null}
         </span>
@@ -47,8 +47,8 @@ const repoName = repoUrl?.includes("github") ? "GitHub" : repoUrl?.includes("git
     </p>
   )}
   {tags && tags.length > 0 && <Tags tags={tags}/>}
-  <div class="flex flex-row gap-10 theme-muted md:hidden">
-    <span class="theme-muted theme-transition">
+  <div class="flex flex-row gap-10 text-theme-dark-muted dark:text-theme-light-muted md:hidden">
+    <span class="text-theme-dark-muted dark:text-theme-light-muted theme-transition">
       {published ? processDate(published) : null}
       {updated ? ` [${processDate(updated)}]` : null}
     </span>

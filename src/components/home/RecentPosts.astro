@@ -10,8 +10,8 @@ const recentPosts = (await getFeaturedPosts("posts"))
 {recentPosts.length > 0 && (
 <div class="space-y-0 mb-20">
   <div class="flex justify-between items-center pb-5">
-    <h2 class="text-3xl sm:text-4xl font-display theme-text">Recent Posts</h2>
-    <Anchor url={getUrl("blog")} additonalClasses="theme-accent hover:theme-text transition-colors hidden md:block" hoverUnderline>
+    <h2 class="text-3xl sm:text-4xl font-display text-theme-dark dark:text-theme-light">Recent Posts</h2>
+    <Anchor url={getUrl("blog")} additonalClasses="text-theme-accent-dark dark:text-theme-accent-light hover:text-theme-dark dark:hover:text-theme-light transition-colors hidden md:block" hoverUnderline>
       View all posts →
     </Anchor>
   </div>

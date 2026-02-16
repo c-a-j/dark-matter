@@ -50,8 +50,8 @@ const allowThemeToggle = siteConfig.site.allowThemeToggle ?? true;
 
     <slot name="head" />
   </head>
-  <body class="theme-bg theme-text theme-transition font-mono min-h-screen flex flex-col justify-between">
-    <div>
+  <body class="bg-theme-light dark:bg-theme-dark text-theme-dark dark:text-theme-light theme-transition font-mono min-h-screen flex flex-col justify-between">
+    <div class="flex-1">
       <Header />
       <main class="mb-30">
         <slot />

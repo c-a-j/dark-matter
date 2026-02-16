@@ -3,7 +3,6 @@ import { getCollection } from "astro:content";
 import path from "path";
 
 import type { collections } from "../content.config";
-import { colorForIntegration } from "astro/runtime/client/dev-toolbar/apps/utils/icons.js";
 const baseUrl = import.meta.env.BASE_URL;
 const isDev = import.meta.env.DEV;
 

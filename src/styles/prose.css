@@ -1,0 +1,200 @@
+/* Inline code */
+@layer base {
+  code {
+    @apply px-1.5 py-0.5 text-sm font-mono rounded;
+    background-color: var(--color-theme-light-muted);
+    color: var(--color-theme-light);
+    font-weight: 500;
+    white-space: nowrap;
+    display: inline-block;
+  }
+
+  code::before,
+  code::after {
+    content: "" !important;
+  }
+
+  :where(.dark, .dark *) code {
+    background-color: var(--color-theme-dark-muted);
+    color: var(--color-theme-dark);
+  }
+
+  /* Code blocks */
+  pre {
+    @apply p-4 rounded-lg overflow-x-auto;
+    background-color: var(--color-theme-dark-muted);
+    color: var(--color-theme-light);
+    white-space: pre;
+    word-break: normal;
+    overflow-wrap: normal;
+  }
+
+  :where(.dark, .dark *) pre {
+    background-color: var(--color-theme-light-muted);
+    color: var(--color-theme-dark);
+  }
+
+  pre code {
+    @apply p-0 bg-transparent;
+    color: inherit;
+    white-space: pre;
+    word-break: normal;
+    overflow-wrap: normal;
+    display: inline;
+  }
+
+  .prose pre,
+  .prose pre code,
+  .prose code[class*="language-"] {
+    white-space: pre;
+    word-break: normal;
+    overflow-wrap: normal;
+  }
+}
+
+/* Code block color overrides — outside @layer to win over prose styles */
+pre code,
+.prose pre code,
+pre.prose code {
+  color: var(--color-theme-light);
+}
+
+:where(.dark, .dark *) pre code,
+:where(.dark, .dark *) .prose pre code,
+:where(.dark, .dark *) pre.prose code {
+  color: var(--color-theme-light);
+}
+
+/* Tables */
+.prose table {
+  @apply border-collapse;
+}
+
+.prose th,
+.prose td {
+  @apply border border-gray-300 dark:border-gray-600 px-4 py-2;
+}
+
+.prose th {
+  @apply bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100 font-semibold;
+}
+
+.prose td {
+  @apply text-gray-900 dark:text-gray-100;
+}
+
+.prose tbody tr:nth-child(even) {
+  @apply bg-gray-50 dark:bg-gray-900;
+}
+
+/* GitHub alert blocks */
+.markdown-alert {
+  @apply border-l-4 pl-4 py-2 my-4 rounded-r;
+}
+
+.markdown-alert-note {
+  @apply border-blue-500 bg-blue-50 dark:bg-blue-900/20;
+}
+
+.markdown-alert-tip {
+  @apply border-green-500 bg-green-50 dark:bg-green-900/20;
+}
+
+.markdown-alert-important {
+  @apply border-purple-500 bg-purple-50 dark:bg-purple-900/20;
+}
+
+.markdown-alert-warning {
+  @apply border-red-500 bg-red-50 dark:bg-red-900/20;
+}
+
+.markdown-alert-caution {
+  @apply border-yellow-500 bg-yellow-50 dark:bg-yellow-900/20;
+}
+
+.markdown-alert-title {
+  display: none;
+}
+
+/* Ordered lists */
+.prose ol {
+  padding-left: 2rem;
+}
+
+.prose ol li {
+  padding-left: 0;
+}
+
+/* Unordered lists */
+.prose ul {
+  padding-left: 1.25rem;
+}
+
+.prose ul li {
+  list-style-type: disc;
+  padding-left: 0.4rem;
+}
+
+.prose ul ul li {
+  list-style-type: circle;
+}
+
+.prose ul ul ul li {
+  list-style-type: square;
+}
+
+/* Blockquotes */
+.prose blockquote {
+  font-style: normal;
+  font-weight: normal;
+  border: 1px solid oklch(from var(--color-theme-dark-muted) l c h / 0.5);
+  border-left: 6px solid oklch(from var(--color-theme-dark-muted) l c h / 0.5);
+  border-radius: 0.8rem;
+  padding: 0 1rem;
+  quotes: none;
+}
+
+:where(.dark, .dark *) .prose blockquote {
+  border-color: oklch(from var(--color-theme-light-muted) l c h / 0.2);
+  border-left-color: oklch(from var(--color-theme-light-muted) l c h / 0.2);
+  background-color: oklch(from var(--color-theme-dark-muted) l c h / 0.05);
+}
+
+/* H2 auto-numbering */
+.prose[data-number-h2="true"] {
+  counter-reset: h2-counter;
+}
+
+.prose[data-number-h2="true"] h2 {
+  counter-increment: h2-counter;
+}
+
+.prose[data-number-h2="true"] h2::before {
+  content: counter(h2-counter) ". ";
+}
+
+/* Collapsible details/summary */
+.prose details summary {
+  cursor: pointer;
+  user-select: none;
+  transition: color var(--theme-transition-duration) var(--theme-transition-timing-function);
+}
+
+.prose details summary:hover {
+  color: var(--color-theme-accent-dark);
+}
+
+:where(.dark, .dark *) .prose details summary:hover {
+  color: var(--color-theme-accent-light);
+}
+
+/* Non-wrappable text */
+.prose .nowrap {
+  white-space: nowrap;
+}
+
+.prose strong,
+.prose em {
+  white-space: nowrap;
+  display: inline-block;
+}

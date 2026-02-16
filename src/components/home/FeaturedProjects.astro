@@ -10,8 +10,8 @@ const featuredProjects = (await getFeaturedPosts("projects"));
 {featuredProjects.length > 0 && (
   <div class="space-y-0 mb-20">
     <div class="flex justify-between items-center pb-5">
-      <h2 class="text-3xl sm:text-4xl font-display theme-text">Featured Projects</h2>
-      <Anchor url={getUrl("projects")} additonalClasses="theme-accent hover:theme-text transition-colors hidden md:block" hoverUnderline>
+      <h2 class="text-3xl sm:text-4xl font-display text-theme-dark dark:text-theme-light">Featured Projects</h2>
+      <Anchor url={getUrl("projects")} additonalClasses="text-theme-accent-dark dark:text-theme-accent-light hover:text-theme-dark dark:hover:text-theme-light transition-colors hidden md:block" hoverUnderline>
         View all projects →
       </Anchor>
     </div>

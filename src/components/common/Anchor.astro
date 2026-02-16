@@ -14,10 +14,10 @@ const { url, external, additonalClasses, hoverUnderline, hoverUnmute } = Astro.p
 <a
   href={url}
   class:list={[
-    "theme-offset font-medium flex items-center",
+    "font-medium flex items-center",
     additonalClasses,
     "anchor",
-    hoverUnmute ? "hover-unmute" : "theme-fill",
+    hoverUnmute ? "hover-unmute" : "fill-theme-dark dark:fill-theme-light",
   ]}
   target={external ? "_blank" : "_self"}
   aria-label={Astro.props["aria-label"]}

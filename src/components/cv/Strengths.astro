@@ -11,7 +11,7 @@ export type Props = {
 const { strengths } = Astro.props;
 ---
 
-<div class="relative theme-text theme-transition flex flex-col gap-3 mb-8">
+<div class="relative text-theme-dark dark:text-theme-light theme-transition flex flex-col gap-3 mb-8">
   <SectionHeader title={strengths.sectionTitle} />
   {Array.isArray(strengths.strengths[0]) ? (
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
