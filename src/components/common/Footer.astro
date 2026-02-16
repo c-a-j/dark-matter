@@ -18,8 +18,11 @@ for (let i = 10; i <= 70; i += 10) {
           url={social.url}
           hoverUnderline={false}
           aria-label={`${config.personal.name} ${social.name}`}
+          additonalClasses="group hover:text-theme-accent-dark dark:hover:text-theme-accent-light hover:fill-theme-accent-dark dark:hover:fill-theme-accent-light theme-transition"
         >
-          <SocialIcon icon={social.icon} />
+          <span class="inline-block transition-transform duration-200 ease-in-out group-hover:rotate-6">
+            <SocialIcon icon={social.icon} />
+          </span>
         </Anchor>
       ))}
     </div>
