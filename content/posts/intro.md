@@ -4,8 +4,7 @@ slug: intro
 description: A comprehensive showcase of the Dark Matter Astro theme features
 longDescription: Discover all the powerful features of the Dark Matter Astro theme including blog posts, projects, notes, CV, search functionality, and more.
 cardImage: "/hero.webp"
-tags: ["blog", "intro", "astro", "theme", "showcase", "features"]
-readTime: 8
+tags: ["astro", "portfolio", "blog", "cv", "open-source"]
 feature: true
 draft: false
 published: 2025-12-18T02:39:03+00:00

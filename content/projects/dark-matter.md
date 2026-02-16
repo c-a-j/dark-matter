@@ -4,7 +4,7 @@ slug: dark-matter
 description: A simple theme for Astro
 longDescription: Dark Matter is a simple theme for Astro
 # cardImage: ""
-tags: ["astro", "portfolio", "blog", "notes", "cv", "open-source"]
+tags: ["astro", "portfolio", "blog", "cv", "open-source"]
 repoUrl: https://github.com/c-a-j/dark-matter
 demoUrl: https://c-a-j.github.io/dark-matter
 published: 2025-02-24T02:39:03+00:00
