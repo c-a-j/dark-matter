@@ -196,6 +196,5 @@ pre.prose code {
 
 .prose strong,
 .prose em {
-  white-space: nowrap;
   display: inline-block;
 }

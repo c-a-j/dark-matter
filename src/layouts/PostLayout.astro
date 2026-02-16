@@ -14,6 +14,7 @@ import Signature from "../components/common/Signature.astro";
 import type { MarkdownHeading } from "astro";
 import PostPaginate from "../components/common/PostPaginate.astro";
 import type { collections } from "../content.config";
+import ProgressBar from "../components/common/ProgressBar.astro";
 import type { PaginationInfo } from "../components/common/PostPaginate.astro";
 
 type Props = {
@@ -41,6 +42,7 @@ const paginate = frontmatter.paginate;
   <Fragment slot="head">
     <SEO configKey={collectionName} />
   </Fragment>
+  <ProgressBar />
   <div class="mx-auto max-w-6xl">
     <div class="flex flex-row gap-8">
       <div class="min-w-0 flex-1">

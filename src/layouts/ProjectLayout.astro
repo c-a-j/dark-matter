@@ -10,7 +10,7 @@ import ContentLayoutHeader from "../components/common/ContentLayoutHeader.astro"
 import DraftBox from "../components/common/DraftBox.astro";
 import TableOfContents from "../components/common/TableOfContents.astro";
 import Signature from "../components/common/Signature.astro";
-
+import ProgressBar from "../components/common/ProgressBar.astro";
 import type { MarkdownHeading } from "astro";
 
 type Props = { frontmatter: PostFrontmatter; headings?: MarkdownHeading[] };
@@ -28,6 +28,7 @@ const numberH2 = frontmatter.numberH2;
   <Fragment slot="head">
     <SEO configKey="project" />
   </Fragment>
+  <ProgressBar />
   <div class="mx-auto max-w-6xl">
     <div class="flex flex-row gap-8">
       <div class="min-w-0 flex-1">

@@ -1,0 +1,42 @@
+<div
+  id="progress-bar"
+  class="fixed left-0 z-10 h-px w-0 bg-theme-accent-light dark:bg-theme-accent-dark"
+>
+</div>
+
+<script>
+  function setupProgressBar() {
+    const progressBar = document.getElementById("progress-bar");
+    if (!progressBar) return;
+
+    const positionBar = () => {
+      const hr = document.querySelector("header hr");
+      if (hr) {
+        const rect = hr.getBoundingClientRect();
+        progressBar.style.top = `${rect.top}px`;
+      }
+    };
+
+    const handleScroll = () => {
+      const winScroll =
+        document.body.scrollTop || document.documentElement.scrollTop;
+      const height =
+        document.documentElement.scrollHeight -
+        document.documentElement.clientHeight;
+      if (height <= 0) {
+        progressBar.style.width = "0%";
+        return;
+      }
+      const scrolled = (winScroll / height) * 100;
+      progressBar.style.width = `${scrolled}%`;
+    };
+
+    positionBar();
+    window.addEventListener("resize", positionBar);
+    document.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+  }
+
+  setupProgressBar();
+  document.addEventListener("astro:after-swap", setupProgressBar);
+</script>
