@@ -42,7 +42,7 @@
   --color-theme-light-muted: var(--color-neutral-400);
   --color-theme-accent-light: var(--color-emerald-400);
   --color-theme-accent-light-muted: var(--color-emerald-300);
-  --color-theme-accent-dark: var(--color-emerald-600);
+  --color-theme-accent-dark: var(--color-emerald-700);
   --color-theme-accent-dark-muted: var(--color-emerald-800);
 }
 

@@ -162,7 +162,7 @@
 /* Tag styling */
 @layer base {
   .tag {
-    @apply cursor-pointer px-2 py-1 text-sm font-semibold opacity-80 hover:opacity-90;
+    @apply cursor-pointer px-2 py-1 text-sm font-semibold opacity-90 hover:opacity-100;
     position: relative;
     color: var(--color-theme-light);
     background-color: var(--color-theme-dark-muted);
