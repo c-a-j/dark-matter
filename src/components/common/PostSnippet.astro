@@ -26,10 +26,10 @@ const repoName = repoUrl?.includes("github") ? "GitHub" : repoUrl?.includes("git
     {(repoUrl || demoUrl) && (
       <div class="flex flex-row gap-5 md:flex hidden">
         <span>
-          {repoUrl ? <Anchor url={repoUrl} external hoverUnmute>{repoName}</Anchor> : null}
+          {repoUrl ? <Anchor url={repoUrl} external additonalClasses="text-theme-dark-muted dark:text-theme-light-muted hover:text-theme-accent-dark-muted dark:hover:text-theme-accent-light-muted fill-theme-dark-muted dark:fill-theme-light-muted hover:fill-theme-accent-dark-muted dark:hover:fill-theme-accent-light-muted transition-colors">{repoName}</Anchor> : null}
         </span>
         <span>
-          {demoUrl ? <Anchor url={demoUrl} external hoverUnmute>Live</Anchor> : null}
+          {demoUrl ? <Anchor url={demoUrl} external additonalClasses="text-theme-dark-muted dark:text-theme-light-muted hover:text-theme-accent-dark-muted dark:hover:text-theme-accent-light-muted fill-theme-dark-muted dark:fill-theme-light-muted hover:fill-theme-accent-dark-muted dark:hover:fill-theme-accent-light-muted transition-colors">Live</Anchor> : null}
         </span>
       </div>
     ) || (

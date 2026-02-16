@@ -5,8 +5,8 @@ description: A simple theme for Astro
 longDescription: Dark Matter is a simple theme for Astro
 # cardImage: ""
 tags: ["astro", "portfolio", "blog", "notes", "cv", "open-source"]
-repoUrl: https://github.com/clint-jordan/dark-matter
-demoUrl: https://clint-jordan.github.io/dark-matter
+repoUrl: https://github.com/c-a-j/dark-matter
+demoUrl: https://c-a-j.github.io/dark-matter
 published: 2025-02-24T02:39:03+00:00
 updated: 2025-02-24T02:39:03+00:00
 feature: true
@@ -18,7 +18,7 @@ draft: false
 
 ## Demo
 
-Check out [the theme website](https://clint-jordan.github.io/dark-matter) to
+Check out [the theme website](https://c-a-j.github.io/dark-matter) to
 see it in action!
 
 

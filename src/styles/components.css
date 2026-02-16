@@ -63,8 +63,12 @@
     left: 0;
     width: 0;
     height: 2px;
-    background-color: currentColor;
+    background-color: var(--color-theme-accent-dark);
     transition: width 0.3s ease;
+  }
+
+  :where(.dark, .dark *) .hover-underline::after {
+    background-color: var(--color-theme-accent-light);
   }
 
   @media (min-width: 768px) {
@@ -75,6 +79,20 @@
 
   .hover-underline.nav {
     --underline-bottom: -4px;
+    color: var(--color-theme-dark);
+    transition: color var(--theme-transition-duration) var(--theme-transition-timing-function);
+  }
+
+  .hover-underline.nav::after {
+    background-color: var(--color-theme-dark);
+  }
+
+  :where(.dark, .dark *) .hover-underline.nav {
+    color: var(--color-theme-light);
+  }
+
+  :where(.dark, .dark *) .hover-underline.nav::after {
+    background-color: var(--color-theme-light);
   }
 
   .hover-underline.nav.active::after {
@@ -83,6 +101,18 @@
 
   .hover-underline.anchor {
     --underline-bottom: -2px;
+  }
+}
+
+/* Anchor/link: accent color by default and on hover */
+@layer base {
+  a.anchor {
+    color: var(--color-theme-accent-dark);
+    transition: color var(--theme-transition-duration) var(--theme-transition-timing-function);
+  }
+
+  :where(.dark, .dark *) a.anchor {
+    color: var(--color-theme-accent-light);
   }
 }
 
