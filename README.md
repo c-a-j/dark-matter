@@ -1,9 +1,9 @@
-# DarkMatter
+# 🌌 DarkMatter
 
 DarkMatter is a minimal, responsive, and accessible Astro blog theme. This
 theme's features will generally follow [my personal blog](https://var-log.dev).
 
-## Features
+## 🔥 Features
 
 ### Implemented
 
@@ -20,12 +20,13 @@ theme's features will generally follow [my personal blog](https://var-log.dev).
 
 ### Planned
 
+- fuzzy search
 - sitemap & RSS feed
 - dynamic OG image generation for blog posts
 
-## Lighthouse Score
+## ✅ Lighthouse Score
 
-[Working on it](https://pagespeed.web.dev/report?url=https%3A%2F%2Fc-a-j.github.io%2Fdark-matter%2Fform_factor=desktop")
+[![Lighthouse Score](public/lighthouse-score.svg)](https://pagespeed.web.dev/report?url=https%3A%2F%2Fc-a-j.github.io%2Fdark-matter%2F&form_factor=desktop)
 
 ## 🚀 Project Structure
 
@@ -98,9 +99,14 @@ All commands are run from the root of the project, from a terminal:
 
 ## 👀 Want to learn more?
 
-https://scripter.co/
-https://chriswilliams.dev/
-https://github.com/RATIU5/zaggonaut
+[Astro Docs](https://docs.astro.build/en/getting-started/)
+
+## 🙏 Special Thanks
+
+- https://astro-paper.pages.dev/
+- https://scripter.co/
+- https://chriswilliams.dev/
+- https://github.com/RATIU5/zaggonaut
 
 ## ✨ Feedback & Suggestions
 
