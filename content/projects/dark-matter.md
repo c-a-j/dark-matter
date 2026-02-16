@@ -9,7 +9,8 @@ repoUrl: https://github.com/clint-jordan/dark-matter
 demoUrl: https://clint-jordan.github.io/dark-matter
 published: 2025-02-24T02:39:03+00:00
 updated: 2025-02-24T02:39:03+00:00
-featured: true
+feature: true
+draft: false
 ---
 
 ## The Details

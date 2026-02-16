@@ -6,7 +6,8 @@ longDescription: Discover all the powerful features of the Dark Matter Astro the
 cardImage: "/hero.webp"
 tags: ["blog", "intro", "astro", "theme", "showcase", "features"]
 readTime: 8
-featured: true
+feature: true
+draft: false
 published: 2025-12-18T02:39:03+00:00
 updated: 2025-12-18T02:39:03+00:00
 ---

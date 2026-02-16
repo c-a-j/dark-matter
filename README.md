@@ -5,22 +5,27 @@ theme's features will generally follow [my personal blog](https://var-log.dev).
 
 ## Features
 
-- type-safe markdown
-- super fast performance
-- accessible (Keyboard/VoiceOver)
-- responsive (mobile ~ desktops)
-- SEO-friendly
-- light & dark mode
-- fuzzy search
+### Implemented
+
+- type-safe markdown (content collections with Zod schemas)
+- super fast performance (static generation, minimal JS)
+- accessible (keyboard navigation, VoiceOver-friendly)
+- responsive (mobile through desktop)
+- SEO-friendly (meta tags, canonical URLs, Open Graph)
+- light & dark mode with theme toggle
+- full-text search (Pagefind, build-time index)
 - draft posts & pagination
-- sitemap & rss feed
-- followed best practices
-- highly customizable
-- dynamic OG image generation for blog posts #15 (Blog Post)
+- posts, projects, and CV content types
+- highly customizable (`site.config.ts`, content collections)
+
+### Planned
+
+- sitemap & RSS feed
+- dynamic OG image generation for blog posts
 
 ## Lighthouse Score
 
-(Working on it)[https://pagespeed.web.dev/report?url=https%3A%2F%2Fc-a-j.github.io%2Fdark-matter%2Fform_factor=desktop"]
+[Working on it](https://pagespeed.web.dev/report?url=https%3A%2F%2Fc-a-j.github.io%2Fdark-matter%2Fform_factor=desktop")
 
 ## 🚀 Project Structure
 
