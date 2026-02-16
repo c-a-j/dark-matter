@@ -3,6 +3,10 @@ import Footer from "../components/common/Footer.astro";
 import Header from "../components/common/Header.astro";
 import TabbedCodeBlocks from "../components/common/TabbedCodeBlocks.astro";
 import "../styles/global.css";
+import "@fontsource/ibm-plex-mono/latin-400.css";
+import "@fontsource/ibm-plex-mono/latin-500.css";
+import "@fontsource/ibm-plex-mono/latin-600.css";
+import "@fontsource/ibm-plex-mono/latin-700.css";
 import { siteConfig } from "../site.config";
 import { getUrl } from "../lib/utils";
 
@@ -17,11 +21,6 @@ const allowThemeToggle = siteConfig.site.allowThemeToggle ?? true;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href={getUrl("/favicon.svg")} />
     <meta name="generator" content={Astro.generator} />
-    <link rel="preconnect" href="https://fonts.bunny.net" />
-    <link
-      href="https://fonts.bunny.net/css?family=ibm-plex-mono:400,400i,500,500i,600,600i,700,700i"
-      rel="stylesheet"
-    />
 
     <!-- Theme detection script - runs before page renders -->
     <script is:inline define:vars={{ defaultTheme, allowThemeToggle }}>
