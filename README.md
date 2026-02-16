@@ -96,7 +96,6 @@ All commands are run from the root of the project, from a terminal:
 | `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `npm run astro -- --help` | Get help using the Astro CLI                     |
 
-
 ## 👀 Want to learn more?
 
 https://scripter.co/
@@ -110,4 +109,5 @@ If you have any suggestions/feedback, you can contact me via my
 find bugs or want to request new features.
 
 ## 📜 License
+
 Licensed under the MIT License, Copyright © 2025
