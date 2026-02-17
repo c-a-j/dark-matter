@@ -27,7 +27,7 @@ experience:
     - title: "Software Engineer"
       employer: "Big Impressive Tech Company"
       startDate: "Dec 2022"
-      endDate: "Dec 2023:"
+      endDate: "Dec 2023"
       bullets:
         - "Developed web applications"
         - "Tested, deployed"
@@ -37,7 +37,7 @@ experience:
       startDate: "Jan 2018"
       endDate: "Dec 2022"
       bullets:
-        - "Assisted teaching intro to computer science"
+        - "Assisted in teaching Introduction to Computer Science"
         - "Led laboratory exercises"
         - "Watched students look at their phones constantly"
 
@@ -49,7 +49,7 @@ otherExperience:
       startDate: "Dec 2014"
       endDate: "Dec 2018"
       bullets:
-        - "Occassionally rescued olympic athletes"
+        - "Occasionally rescued Olympic athletes"
     - title: "Head of Robotics Club"
       employer: "Super Elite High School"
       startDate: "Dec 2014"
