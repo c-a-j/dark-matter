@@ -160,6 +160,17 @@ pre.prose code {
   background-color: oklch(from var(--color-theme-dark-muted) l c h / 0.05);
 }
 
+/* Flowing prose text: keep whole-word wrapping and disable hyphenation */
+.prose p,
+.prose li,
+.prose blockquote,
+.prose td {
+  -webkit-hyphens: none;
+  hyphens: none;
+  word-break: normal;
+  overflow-wrap: normal;
+}
+
 /* H2 auto-numbering */
 .prose[data-number-h2="true"] {
   counter-reset: h2-counter;
