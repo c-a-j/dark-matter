@@ -77,6 +77,22 @@ export const getPosts = async (
   });
 };
 
+const sortPostsAscending = (
+  posts: MarkdownPost[]
+) => {
+  return [...posts].sort(
+    (a, b) => getSortDate(a).getTime() - getSortDate(b).getTime()
+  );
+}
+
+const sortPostsDescending = (
+  posts: MarkdownPost[]
+) => {
+  return [...posts].sort(
+    (a, b) => getSortDate(b).getTime() - getSortDate(a).getTime()
+  );
+}
+
 export const getPostsAscending = async (
   collectionName: MarkdownCollectionName
 ) => {
@@ -176,6 +192,13 @@ export const getPaginationInfo = async ({
     return findAdjacentPosts(sorted, url);
   }
 
-  const posts = await getPostsDescending(collectionName);
-  return findAdjacentPosts(posts, url);
+  const posts = (await getPosts(collectionName)) as MarkdownPost[];
+  const collectionPosts = sortPostsAscending(
+    posts.filter((post) => {
+      return (!post.isSubcollection && !post.draft && post.paginate)
+    })
+  )
+  
+  
+  return findAdjacentPosts(collectionPosts, url);
 };
