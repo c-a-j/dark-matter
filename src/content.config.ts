@@ -27,6 +27,8 @@ const baseSchema = z.object({
   paginate: z.boolean().default(false),
 });
 
+export type BaseSchema = z.infer<typeof baseSchema>
+
 /** Define a markdown content collection with auto-generated slugs. */
 function defineMarkdownCollection(directory: string, schema: z.ZodObject<any>) {
   return defineCollection({

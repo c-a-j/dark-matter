@@ -1,15 +1,15 @@
 import { getCollection } from "astro:content";
 import path from "path";
-
-import type { collections } from "../content.config";
+import type { MarkdownPost, MarkdownCollectionName} from "../lib/types";
 const baseUrl = import.meta.env.BASE_URL;
 const isDev = import.meta.env.DEV;
 
-/**
- * Processes the date of an article and returns a string representing the processed date.
- * @param timestamp the timestamp to process
- * @returns a string representing the processed timestamp
- */
+ 
+ /**
+  * Processes the date of an article and returns a string representing the processed date.
+  * @param timestamp the timestamp to process
+  * @returns a string representing the processed timestamp
+  */
 export const processDate = (date: Date | undefined | null) => {
   if (!date) return "";
   const monthSmall = date.toLocaleString("default", { month: "short" });
@@ -18,18 +18,20 @@ export const processDate = (date: Date | undefined | null) => {
   return `${monthSmall} ${day}, ${year}`;
 };
 
+const getSortDate = (post: MarkdownPost) => {
+  return post.published ?? post.updated ?? new Date(0);
+}
+
 export const getPublishedCollection = async (
-  collectionName: keyof typeof collections
+  collectionName: MarkdownCollectionName
 ) => {
   const entries = await getCollection(collectionName);
+  const data = (post: (typeof entries)[number]) => post.data as MarkdownPost
 
   return entries
     .filter(post => {
-      if (isDev) {
-        return true;
-      } else {
-        return !post.data.draft;
-      }
+      if (isDev) return true;
+      return !data(post).draft;
     })
     .map(post => {
       const filePath = post.filePath;
@@ -52,7 +54,7 @@ export const getPublishedCollection = async (
 };
 
 export const getCollectionStaticPaths = async (
-  collectionName: keyof typeof collections
+  collectionName: MarkdownCollectionName
 ) => {
   const entries = await getPublishedCollection(collectionName);
   return entries.map(({ entry, collectionRelativePath }) => ({
@@ -63,7 +65,9 @@ export const getCollectionStaticPaths = async (
   }));
 };
 
-export const getPosts = async (collectionName: keyof typeof collections) => {
+export const getPosts = async (
+  collectionName: MarkdownCollectionName
+) => {
   const posts = await getPublishedCollection(collectionName);
   return posts.map(({ entry, ...rest }) => {
     return {
@@ -74,33 +78,25 @@ export const getPosts = async (collectionName: keyof typeof collections) => {
 };
 
 export const getPostsAscending = async (
-  collectionName: keyof typeof collections
+  collectionName: MarkdownCollectionName
 ) => {
-  const posts = await getPosts(collectionName);
-  const sorted = posts.sort((a, b) => {
-    // Sort by published date, fallback to updated date, then by title
-    const dateA = a.published || a.updated || new Date(0);
-    const dateB = b.published || b.updated || new Date(0);
-    return dateA.getTime() - dateB.getTime();
-  });
-  return sorted;
+  const posts = (await getPosts(collectionName)) as MarkdownPost[];
+  return [...posts].sort(
+    (a, b) => getSortDate(a).getTime() - getSortDate(b).getTime()
+  );
 };
 
 export const getPostsDescending = async (
-  collectionName: keyof typeof collections
+  collectionName: MarkdownCollectionName
 ) => {
-  const posts = await getPosts(collectionName);
-  const sorted = posts.sort((a, b) => {
-    // Sort by published date, fallback to updated date, then by title
-    const dateA = a.published || a.updated || new Date(0);
-    const dateB = b.published || b.updated || new Date(0);
-    return dateB.getTime() - dateA.getTime();
-  });
-  return sorted;
+  const posts = (await getPosts(collectionName)) as MarkdownPost[];
+  return [...posts].sort(
+    (a, b) => getSortDate(b).getTime() - getSortDate(a).getTime()
+  );
 };
 
 export const getFeaturedPosts = async (
-  collectionName: keyof typeof collections
+  collectionName: MarkdownCollectionName
 ) => {
   const posts = await getPostsDescending(collectionName);
   const featured = posts
@@ -111,7 +107,7 @@ export const getFeaturedPosts = async (
 };
 
 export const getVisiblePosts = async (
-  collectionName: keyof typeof collections
+  collectionName: MarkdownCollectionName
 ) => {
   const posts = await getPostsDescending(collectionName);
   const visible = posts.filter(post => post.hide === false);
@@ -126,7 +122,7 @@ export const getUrl = (p: string) => {
 
 // Filter posts that are in the specified subdirectory
 export const getSubCollection = async (
-  collectionName: keyof typeof collections,
+  collectionName: MarkdownCollectionName,
   indexDirectory: string
 ) => {
   const posts = await getPostsAscending(collectionName);
@@ -158,7 +154,7 @@ const findAdjacentPosts = (
 
 interface getPaginationInfoProps {
   url: string;
-  collectionName: keyof typeof collections;
+  collectionName: MarkdownCollectionName;
   isSubcollection: boolean;
 }
 export const getPaginationInfo = async ({
