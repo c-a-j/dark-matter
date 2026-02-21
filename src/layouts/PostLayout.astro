@@ -1,12 +1,11 @@
 ---
-import { processDate } from "../lib/utils";
 import { siteConfig } from "../site.config";
-import type { PostFrontmatter } from "../lib/types";
+import type { ContentFrontmatter } from "../lib/types";
 import Section from "../components/common/Section.astro";
 import Prose from "../components/common/Prose.astro";
 import Layout from "./Layout.astro";
 import SEO from "../components/common/SEO.astro";
-import ContentLayoutHeader from "../components/common/ContentLayoutHeader.astro";
+import PostHeader from "../components/common/PostHeader.astro";
 import DraftBox from "../components/common/DraftBox.astro";
 import TableOfContents from "../components/common/TableOfContents.astro";
 import SubCollectionLinks from "../components/common/SubCollectionLinks.astro";
@@ -18,15 +17,13 @@ import ProgressBar from "../components/common/ProgressBar.astro";
 import type { PaginationInfo } from "../components/common/PostPaginate.astro";
 
 type Props = {
-  frontmatter: PostFrontmatter;
+  frontmatter: ContentFrontmatter;
   headings?: MarkdownHeading[];
   collectionName: keyof typeof collections;
   paginationInfo?: PaginationInfo;
 };
 
 const { frontmatter, headings, collectionName, paginationInfo } = Astro.props;
-const publishDate = processDate(frontmatter.published);
-const updateDate = processDate(frontmatter.updated);
 const tags = frontmatter.tags;
 const config = siteConfig;
 const isDev = import.meta.env.DEV;
@@ -48,11 +45,12 @@ const paginate = frontmatter.paginate;
       <div class="min-w-0 flex-1">
         <Section class="pt-8">
           {isDev && isDraft && <DraftBox />}
-          <ContentLayoutHeader
+          <PostHeader
             title={frontmatter.title}
             tags={tags}
-            publishDate={publishDate}
-            updateDate={updateDate}
+            publishDate={frontmatter.published}
+            updateDate={frontmatter.updated}
+            links={frontmatter.links}
           />
           <Prose class="max-w-none" numberH2={numberH2}>
             <slot />

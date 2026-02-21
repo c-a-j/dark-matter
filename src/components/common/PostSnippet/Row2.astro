@@ -1,0 +1,28 @@
+---
+import PostDate from "../PostDate.astro";
+import PostLinks from "../PostLinks.astro";
+import Anchor from "../Anchor.astro";
+
+type Link = {
+  label: string;
+  url: string;
+};
+
+const { description, published, updated, links } =
+  Astro.props;
+---
+
+<div class="flex flex-row justify-between">
+  <div>
+    <PostDate {published} {updated} additionalClasses="md:hidden" />
+    <div class="mb-1">
+      {description && <p class="">{description}</p>}
+    </div>
+  </div>
+  <div class="hidden md:flex">
+    <PostLinks 
+      links={links} 
+      additionalClasses="md:hover-unmute"
+    />
+  </div>
+</div>

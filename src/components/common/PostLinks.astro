@@ -1,0 +1,26 @@
+---
+import Anchor from "./Anchor.astro";
+
+type Link = {
+  label: string;
+  url: string;
+};
+
+const { links, additionalClasses } = Astro.props;
+---
+
+<div class:list={[
+  "flex flex-row gap-2"
+]}>
+  {links && links.map((link: Link) => {
+    return (
+      <Anchor 
+        url={link.url} 
+        external 
+        additionalClasses={additionalClasses}
+      >
+        {link.label}
+      </Anchor>
+    );
+  })}
+</div>

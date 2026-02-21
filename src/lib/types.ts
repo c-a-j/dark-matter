@@ -1,11 +1,6 @@
-import type { CollectionEntry } from "astro:content";
-import type { BaseSchema } from "../content.config"
+import type { BaseSchema } from "../content.config";
 
-export type PostFrontmatter = CollectionEntry<"posts">["data"] & {
-  url: string;
-};
-
-export type ProjectFrontmatter = CollectionEntry<"projects">["data"] & {
+export type ContentFrontmatter = BaseSchema & {
   url: string;
 };
 

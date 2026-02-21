@@ -1,43 +1,38 @@
 ---
 export type Props = {
   url: string;
-  additonalClasses?: string;
+  additionalClasses?: string;
   external?: boolean;
   "aria-label"?: string;
-  hoverUnderline?: boolean;
-  hoverUnmute?: boolean;
 };
 
-const { url, external, additonalClasses, hoverUnderline, hoverUnmute } =
+const { url, external, additionalClasses } =
   Astro.props;
+const anchorClasses = [
+  "inline-flex flex-row items-center font-medium anchor",
+  additionalClasses,
+];
 ---
 
 <a
   href={url}
-  class:list={[
-    "flex items-center font-medium",
-    additonalClasses,
-    "anchor",
-    hoverUnmute ? "hover-unmute" : "fill-theme-dark dark:fill-theme-light",
-  ]}
+  class:list={anchorClasses}
   target={external ? "_blank" : "_self"}
   aria-label={Astro.props["aria-label"]}
 >
-  <span class:list={[hoverUnderline ? "hover-underline" : null]}>
+  <span>
     <slot />
   </span>
-  {
-    external ? (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        class="h-6 w-6"
-        viewBox="0 0 512 512"
-      >
-        <path
-          fill-rule="evenodd"
-          d="M362.666 149.333V320H320l-.001-97.831l-154.51 154.51l-30.169-30.17L289.829 192h-97.83v-42.666z"
-        />
-      </svg>
-    ) : null
-  }
+  {external && (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="inline-block h-6 w-6 shrink-0"
+      viewBox="0 0 512 512"
+    >
+      <path
+        fill-rule="evenodd"
+        d="M362.666 149.333V320H320l-.001-97.831l-154.51 154.51l-30.169-30.17L289.829 192h-97.83v-42.666z"
+      />
+    </svg>
+  )}
 </a>

@@ -1,0 +1,18 @@
+---
+import { processDate } from "../../../lib/utils";
+import Anchor from "../Anchor.astro";
+import Tags from "../../tags/Tags.astro";
+import Row1 from "./Row1.astro";
+import Row2 from "./Row2.astro";
+import Row3 from "./Row3.astro";
+import Row4 from "./Row4.astro";
+---
+
+<div
+  class="relative flex flex-col text-theme-dark theme-transition dark:text-theme-light"
+>
+  <Row1 {...Astro.props}/>
+  <Row2 {...Astro.props}/>
+  <Row3 {...Astro.props}/>
+  <Row4 {...Astro.props}/>
+</div>

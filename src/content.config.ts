@@ -8,6 +8,10 @@ const baseSchema = z.object({
   longDescription: z.string().optional(),
   cardImage: z.string().optional(),
   tags: z.array(z.string()).optional(),
+  readTime: z.number().optional(),
+  repoUrl: z.string().url().optional(),
+  demoUrl: z.string().url().optional(),
+  links: z.array(z.object({ label: z.string(), url: z.string().url() })).optional(),
   feature: z.boolean().default(false),
   hide: z.boolean().default(false),
   draft: z.boolean().default(true),
@@ -105,16 +109,11 @@ const cvSchema = z.object({
 export const collections = {
   posts: defineMarkdownCollection(
     "./content/posts",
-    baseSchema.extend({
-      readTime: z.number().optional(),
-    })
+    baseSchema
   ),
   projects: defineMarkdownCollection(
     "./content/projects",
-    baseSchema.extend({
-      repoUrl: z.string().url().optional(),
-      demoUrl: z.string().url().optional(),
-    })
+    baseSchema
   ),
   cv: defineCollection({
     loader: glob({ pattern: "**/*.yaml", base: "./content/cv" }),

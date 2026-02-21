@@ -1,0 +1,12 @@
+---
+import { processDate } from "../../../lib/utils";
+import Anchor from "../Anchor.astro";
+import Tags from "../../tags/Tags.astro";
+
+const { title, description, url, tags, published, updated, repoUrl, demoUrl } =
+  Astro.props;
+---
+
+<>
+  {tags && tags.length > 0 && <Tags tags={tags} />}
+</>

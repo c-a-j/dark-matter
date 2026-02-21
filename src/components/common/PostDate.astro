@@ -1,0 +1,20 @@
+---
+import { processDate } from "./../../lib/utils";
+import TablerIcon from "./TablerIcon.astro";
+
+const { published, updated, additionalClasses } =
+  Astro.props;
+---
+
+<div 
+  class:list={[
+  "flex flex-row text-theme-dark-muted dark:text-theme-light-muted gap-1",
+  additionalClasses
+  ]}
+>
+  <TablerIcon icon="calendar-week" size={18} />
+  <span class="text-theme-dark-muted theme-transition dark:text-theme-light-muted italic text-sm">
+    {published ? processDate(published) : null}
+    {updated ? ` [${processDate(updated)}]` : null}
+  </span>
+</div>

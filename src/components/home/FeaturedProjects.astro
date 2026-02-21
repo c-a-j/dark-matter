@@ -1,5 +1,5 @@
 ---
-import PostSnippet from "../common/PostSnippet.astro";
+import PostSnippet from "../common/PostSnippet/PostSnippet.astro";
 import Anchor from "../common/Anchor.astro";
 import { getFeaturedPosts } from "../../lib/utils";
 import { getUrl } from "../../lib/utils";
@@ -14,13 +14,14 @@ const featuredProjects = await getFeaturedPosts("projects");
         <h2 class="font-display text-3xl text-theme-dark sm:text-4xl dark:text-theme-light">
           Featured Projects
         </h2>
-        <Anchor
-          url={getUrl("projects")}
-          additonalClasses="text-theme-dark-muted dark:text-theme-light-muted hover:text-theme-accent-dark-muted dark:hover:text-theme-accent-light-muted transition-colors hidden md:block"
-          hoverUnderline
-        >
-          View all projects →
-        </Anchor>
+        <div class="hidden md:flex">
+          <Anchor
+            url={getUrl("projects")}
+            additionalClasses="md:hover-unmute md:hover-underline"
+          >
+            View all projects →
+          </Anchor>
+        </div>
       </div>
 
       <div class="space-y-6">
@@ -34,6 +35,7 @@ const featuredProjects = await getFeaturedPosts("projects");
             updated={project.updated}
             repoUrl={project.repoUrl}
             demoUrl={project.demoUrl}
+            links={project.links}
           />
         ))}
       </div>

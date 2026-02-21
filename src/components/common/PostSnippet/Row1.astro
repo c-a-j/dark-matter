@@ -1,0 +1,15 @@
+---
+import { processDate } from "../../../lib/utils";
+import Anchor from "../Anchor.astro";
+import PostDate from "../PostDate.astro";
+
+const { title, url, published, updated } =
+  Astro.props;
+---
+
+<div class="flex items-center justify-between">
+  <Anchor url={url} additionalClasses="text-xl md:mb-2" >
+    {title}
+  </Anchor>
+  <PostDate {published} {updated} additionalClasses="hidden md:flex"/>
+</div>

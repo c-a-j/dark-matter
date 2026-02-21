@@ -66,15 +66,13 @@
   }
 }
 
-/* Hover underline effect */
-@layer base {
-  .hover-underline {
-    position: relative;
-    text-decoration: none;
-    display: inline-block;
-  }
+/* Hover underline utility */
+@utility hover-underline {
+  position: relative;
+  text-decoration: none;
+  display: inline-block;
 
-  .hover-underline::after {
+  &::after {
     content: "";
     position: absolute;
     bottom: var(--underline-bottom, -2px);
@@ -85,77 +83,111 @@
     transition: width 0.3s ease;
   }
 
-  :where(.dark, .dark *) .hover-underline::after {
+  :where(.dark, .dark *) &::after {
     background-color: var(--color-theme-accent-light);
   }
 
   @media (min-width: 768px) {
-    .hover-underline:hover::after {
+    &:hover::after {
       width: 100%;
     }
   }
 
-  .hover-underline.nav {
+  &.nav {
     --underline-bottom: -4px;
     color: var(--color-theme-dark);
     transition: color var(--theme-transition-duration)
       var(--theme-transition-timing-function);
   }
 
-  .hover-underline.nav::after {
+  &.nav::after {
     background-color: var(--color-theme-dark);
   }
 
-  :where(.dark, .dark *) .hover-underline.nav {
+  :where(.dark, .dark *) &.nav {
     color: var(--color-theme-light);
   }
 
-  :where(.dark, .dark *) .hover-underline.nav::after {
+  :where(.dark, .dark *) &.nav::after {
     background-color: var(--color-theme-light);
   }
 
-  .hover-underline.nav.active::after {
+  &.nav.active::after {
     width: 100%;
   }
 
-  .hover-underline.anchor {
+  &.anchor {
     --underline-bottom: -2px;
   }
 }
 
 /* Anchor/link: accent color by default and on hover */
 @layer base {
-  a.anchor {
+  .anchor {
     color: var(--color-theme-accent-dark);
-    transition: color var(--theme-transition-duration)
-      var(--theme-transition-timing-function);
+    fill: var(--color-theme-accent-dark);
+    transition:
+      color var(--theme-transition-duration)
+        var(--theme-transition-timing-function),
+      fill var(--theme-transition-duration)
+        var(--theme-transition-timing-function);
   }
 
-  :where(.dark, .dark *) a.anchor {
+  :where(.dark, .dark *) .anchor {
     color: var(--color-theme-accent-light);
+    fill: var(--color-theme-accent-light);
   }
 }
 
-/* Hover unmute: muted by default, full color on hover (desktop only) */
-@layer base {
-  .hover-unmute {
-    color: var(--color-theme-dark-muted);
-    fill: var(--color-theme-dark-muted) !important;
-    :where(.dark, .dark *) & {
-      color: var(--color-theme-light-muted);
-      fill: var(--color-theme-light-muted) !important;
-    }
+/* Hover unmute utility: muted by default, accent on hover */
+@utility hover-unmute {
+  color: var(--color-theme-dark-muted);
+  fill: var(--color-theme-dark-muted);
+  transition:
+    color var(--theme-transition-duration)
+      var(--theme-transition-timing-function),
+    fill var(--theme-transition-duration)
+      var(--theme-transition-timing-function);
+
+  :where(.dark, .dark *) & {
+    color: var(--color-theme-light-muted);
+    fill: var(--color-theme-light-muted);
   }
 
-  @media (min-width: 768px) {
-    .hover-unmute:hover {
-      color: var(--color-theme-dark);
-      fill: var(--color-theme-dark) !important;
-      :where(.dark, .dark *) & {
-        color: var(--color-theme-light);
-        fill: var(--color-theme-light) !important;
-      }
-    }
+  &:hover {
+    color: var(--color-theme-accent-dark);
+    fill: var(--color-theme-accent-dark);
+  }
+
+  :where(.dark, .dark *) &:hover {
+    color: var(--color-theme-accent-light);
+    fill: var(--color-theme-accent-light);
+  }
+}
+
+/* Hover accent utility: body color by default, accent on hover */
+@utility hover-accent {
+  color: var(--color-theme-dark);
+  fill: var(--color-theme-dark);
+  transition:
+    color var(--theme-transition-duration)
+      var(--theme-transition-timing-function),
+    fill var(--theme-transition-duration)
+      var(--theme-transition-timing-function);
+
+  :where(.dark, .dark *) & {
+    color: var(--color-theme-light);
+    fill: var(--color-theme-light);
+  }
+
+  &:hover {
+    color: var(--color-theme-accent-dark);
+    fill: var(--color-theme-accent-dark);
+  }
+
+  :where(.dark, .dark *) &:hover {
+    color: var(--color-theme-accent-light);
+    fill: var(--color-theme-accent-light);
   }
 }
 
